@@ -51,6 +51,7 @@ function init() {
     cellBPosition: null,
     cellCPosition: null,
     cellDPosition: null,
+    orientation: 'default',
   }
 
 
@@ -59,7 +60,7 @@ function init() {
     for (let row = 1; row <= height; row++) {
       for (let column = 1; column <= width; column++) {
         const cell = document.createElement('div')
-        cell.classList = `Y${row}X${column}`
+        cell.classList = `Y${row} X${column}`
         grid.appendChild(cell)
         cells.push(cell)
       }
@@ -71,12 +72,11 @@ function init() {
   //* Generate a random shape
 
   function generateActiveTetrimono() {
-    activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    // activeTetrimonoShape = tetrimonoes[0]
+    // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+    activeTetrimonoShape = tetrimonoes[0]
     return activeTetrimonoShape
   }
 
-  console.log(activeTetrimonoShape)
 
   //* Add a new shape to the top of the page
 
@@ -92,9 +92,9 @@ function init() {
     activeTetrimono.cellBPosition = startingPosition[1]
     activeTetrimono.cellCPosition = startingPosition[2]
     activeTetrimono.cellDPosition = startingPosition[3]
+    activeTetrimono.orientation = 'default'
   }
   addActiveTetrimono()
-
 
 
 
@@ -129,7 +129,6 @@ function init() {
   function moveDownActiveTetrimono() {
     removeActiveTetrimono()
 
-    //* Moves the active cells to ONE ROW BELOW / 10 cells
     moveCells(10)
 
     //* Checks if the cell below the current active cell is free:
@@ -147,7 +146,6 @@ function init() {
       addActiveTetrimono()
     } else {
 
-      //* Turns the new Active Cell FULL      
       fillSquares(0)
 
       //* Checks to see if the Active Cell is on the BOTTOM ROW:
@@ -160,64 +158,167 @@ function init() {
       } else if (activeTetrimono.cellDPosition >= 190 && activeTetrimono.cellDPosition <= 199) {
         addActiveTetrimono()
       } else {
-        cells[activeTetrimono.cellAPosition].classList.add('square-full')
-        cells[activeTetrimono.cellBPosition].classList.add('square-full')
-        cells[activeTetrimono.cellCPosition].classList.add('square-full')
-        cells[activeTetrimono.cellDPosition].classList.add('square-full')
+        return
       }
     }
   }
 
   //* Move LEFT active Tetrimono
   function moveLeftActiveTetrimono() {
-    removeActiveTetrimono()
-    moveCells(-1)
-    fillSquares(0)
-  }
 
-  //* Move Right active Tetrimono
-  function moveRightActiveTetrimono() {
-    removeActiveTetrimono()
-    moveCells(+1)
-    fillSquares(0)
-  }
-
-  function rotateActiveTetrimono() {
-    if (activeTetrimonoShape.name === 'Orange Ricky') {
+    //* Check to see if any cells are the edge of the grid:
+    if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+      return
+    } else if (cells[activeTetrimono.cellBPosition].classList.contains('X1')) {
+      return
+    } else if (cells[activeTetrimono.cellCPosition].classList.contains('X1')) {
+      return
+    } else if (cells[activeTetrimono.cellCPosition].classList.contains('X1')) {
+      return
+    } else {
+      console.log('the other option')
       removeActiveTetrimono()
+      moveCells(-1)
+      fillSquares(0)
+    }
+  }
 
-      activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 10
-      activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 1
-      activeTetrimono.cellCPosition = activeTetrimono.cellCPosition - 10
-      activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 21
+  //* Move RIGHT active Tetrimono
 
+  function moveRightActiveTetrimono() {
+
+    //* Check to see if any cells are the edge of the grid:
+    if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+      return
+    } else if (cells[activeTetrimono.cellBPosition].classList.contains('X10')) {
+      return
+    } else if (cells[activeTetrimono.cellCPosition].classList.contains('X10')) {
+      return
+    } else if (cells[activeTetrimono.cellDPosition].classList.contains('X10')) {
+      return
+    } else {
+      console.log('the other option')
+      removeActiveTetrimono()
+      moveCells(+1)
       fillSquares(0)
     }
   }
 
 
+
+  function rotateActiveTetrimono() {
+
+    if (activeTetrimonoShape.name === 'Orange Ricky') {
+
+      if (activeTetrimono.orientation === 'default') {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 9
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition - 20
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition - 11
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 2
+        activeTetrimono.orientation = 'left-side'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+
+      } else if (activeTetrimono.orientation === 'left-side') {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 1
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 12
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 1
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 10
+        activeTetrimono.orientation = 'upside-down'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+
+      } else if (activeTetrimono.orientation === 'upside-down') {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 19
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 10
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 1
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 8
+        activeTetrimono.orientation = 'right-side'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+
+      } else {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 11
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition - 2
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition  + 9
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition  + 20
+        activeTetrimono.orientation = 'default'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+      }
+    }
+
+    if (activeTetrimonoShape.name === 'Orange Ricky') {
+
+      if (activeTetrimono.orientation === 'default') {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 9
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition - 20
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition - 11
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 2
+        activeTetrimono.orientation = 'left-side'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+
+      } else if (activeTetrimono.orientation === 'left-side') {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 1
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 12
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 1
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 10
+        activeTetrimono.orientation = 'upside-down'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+
+      } else if (activeTetrimono.orientation === 'upside-down') {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 19
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 10
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 1
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 8
+        activeTetrimono.orientation = 'right-side'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+
+      } else {
+        removeActiveTetrimono()
+        activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 11
+        activeTetrimono.cellBPosition = activeTetrimono.cellBPosition - 2
+        activeTetrimono.cellCPosition = activeTetrimono.cellCPosition  + 9
+        activeTetrimono.cellDPosition = activeTetrimono.cellDPosition  + 20
+        activeTetrimono.orientation = 'default'
+        console.log(activeTetrimono.orientation)
+        fillSquares(0)
+      }
+    }
+
+  }
+
+
   //* Move a shape with the keyboard
-  
+
   function handleKeyDown(event) {
-
-
     switch (event.keyCode) {
       case 40:
-        removeActiveTetrimono()
+        // removeActiveTetrimono()
         moveDownActiveTetrimono()
         console.log('test')
         break
       case 37:
-        removeActiveTetrimono()
+        // removeActiveTetrimono()
         moveLeftActiveTetrimono()
         console.log('test')
         break
       case 39:
-        removeActiveTetrimono()
+        // removeActiveTetrimono()
         moveRightActiveTetrimono()
         break
       case 38:
-        removeActiveTetrimono()
+        // removeActiveTetrimono()
         rotateActiveTetrimono()
         break
     }
