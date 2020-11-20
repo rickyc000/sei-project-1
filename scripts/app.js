@@ -71,8 +71,8 @@ function init() {
   //* Generate a random shape
 
   function generateActiveTetrimono() {
-    // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    activeTetrimonoShape = tetrimonoes[0]
+    activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+    // activeTetrimonoShape = tetrimonoes[0]
     return activeTetrimonoShape
   }
 
@@ -104,21 +104,80 @@ function init() {
     cells[activeTetrimono.cellDPosition].classList.remove('square-full')
   }
 
-  // addActiveTetrimono()
-
 
   function moveDownActiveTetrimono() {
     removeActiveTetrimono()
+
+    //* Makes the Active Cell ONE BELOW 
     activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 10
     activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 10
     activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 10
     activeTetrimono.cellDPosition = activeTetrimono.cellDPosition + 10
+    console.log(activeTetrimono.cellAPosition, activeTetrimono.cellBPosition, activeTetrimono.cellCPosition)
 
-    cells[activeTetrimono.cellAPosition].classList.add('square-full')
-    cells[activeTetrimono.cellBPosition].classList.add('square-full')
-    cells[activeTetrimono.cellCPosition].classList.add('square-full')
-    cells[activeTetrimono.cellDPosition].classList.add('square-full')
+
+    if (cells[activeTetrimono.cellAPosition].classList.contains('square-full')) {
+      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
+      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      console.log(activeTetrimono.cellAPosition + ' SQUARE FULL' )
+      addActiveTetrimono()
+    } else if (cells[activeTetrimono.cellBPosition].classList.contains('square-full')) {
+      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
+      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      addActiveTetrimono()
+    } else if (cells[activeTetrimono.cellCPosition].classList.contains('square-full')) {
+      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
+      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      addActiveTetrimono()
+    } else if (cells[activeTetrimono.cellDPosition].classList.contains('square-full')) {
+      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
+      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
+      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      addActiveTetrimono()
+    } else {
+
+      //* Turns the new Active Cell FULL
+      cells[activeTetrimono.cellAPosition].classList.add('square-full')
+      cells[activeTetrimono.cellBPosition].classList.add('square-full')
+      cells[activeTetrimono.cellCPosition].classList.add('square-full')
+      cells[activeTetrimono.cellDPosition].classList.add('square-full')
+
+
+
+      //* Checks to see if the Active Cell is on the BOTTOM ROW:
+      if (activeTetrimono.cellAPosition >= 190 && activeTetrimono.cellAPosition <= 199) {
+        addActiveTetrimono()
+      } else if (activeTetrimono.cellBPosition >= 190 && activeTetrimono.cellBPosition <= 199) {
+        addActiveTetrimono()
+      } else if (activeTetrimono.cellCPosition >= 190 && activeTetrimono.cellCPosition <= 199) {
+        addActiveTetrimono()
+      } else if (activeTetrimono.cellDPosition >= 190 && activeTetrimono.cellDPosition <= 199) {
+        addActiveTetrimono()
+      } else {
+        cells[activeTetrimono.cellAPosition].classList.add('square-full')
+        cells[activeTetrimono.cellBPosition].classList.add('square-full')
+        cells[activeTetrimono.cellCPosition].classList.add('square-full')
+        cells[activeTetrimono.cellDPosition].classList.add('square-full')
+      }
+
+    }
+
+
+
   }
+
+
 
   function moveLeftActiveTetrimono() {
     removeActiveTetrimono()
@@ -148,7 +207,7 @@ function init() {
 
   function rotateActiveTetrimono() {
     if (activeTetrimonoShape.name === 'Orange Ricky') {
-      removeActiveTetrimono() 
+      removeActiveTetrimono()
 
       activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 10
       activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 1
@@ -206,7 +265,7 @@ function init() {
 
   // setInterval(() => {
   //   moveDownActiveTetrimono()
-  // }, 1000)
+  // }, 700)
 
 
 }
