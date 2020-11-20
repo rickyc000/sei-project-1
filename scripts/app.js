@@ -78,7 +78,7 @@ function init() {
 
   console.log(activeTetrimonoShape)
 
-  //* Add a shape
+  //* Add a new shape to the top of the page
 
   function addActiveTetrimono() {
     const startingPosition = generateActiveTetrimono().defaultPosition
@@ -96,6 +96,8 @@ function init() {
   addActiveTetrimono()
 
 
+
+
   //* Remove a shape
   function removeActiveTetrimono() {
     cells[activeTetrimono.cellAPosition].classList.remove('square-full')
@@ -105,55 +107,48 @@ function init() {
   }
 
 
+
+  //* Function to drop all Active Cell Positions by 1 row (or 10 cells)
+  function moveCells(number) {
+    activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + number
+    activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + number
+    activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + number
+    activeTetrimono.cellDPosition = activeTetrimono.cellDPosition + number
+  }
+
+
+  //* Fills a block of squares (-10 used for when the block becomes stationary, filling the squares above)
+  function fillSquares(number) {
+    cells[activeTetrimono.cellAPosition + number].classList.add('square-full')
+    cells[activeTetrimono.cellBPosition + number].classList.add('square-full')
+    cells[activeTetrimono.cellCPosition + number].classList.add('square-full')
+    cells[activeTetrimono.cellDPosition + number].classList.add('square-full')
+  }
+
+  //* Remove Tetrimono from it's existing cell position
   function moveDownActiveTetrimono() {
     removeActiveTetrimono()
 
-    //* Makes the Active Cell ONE BELOW 
-    activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 10
-    activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 10
-    activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 10
-    activeTetrimono.cellDPosition = activeTetrimono.cellDPosition + 10
-    console.log(activeTetrimono.cellAPosition, activeTetrimono.cellBPosition, activeTetrimono.cellCPosition)
+    //* Moves the active cells to ONE ROW BELOW / 10 cells
+    moveCells(10)
 
-
+    //* Checks if the cell below the current active cell is free:
     if (cells[activeTetrimono.cellAPosition].classList.contains('square-full')) {
-      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
-      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
-      console.log(activeTetrimono.cellAPosition + ' SQUARE FULL' )
+      fillSquares(-10)
       addActiveTetrimono()
     } else if (cells[activeTetrimono.cellBPosition].classList.contains('square-full')) {
-      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
-      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      fillSquares(-10)
       addActiveTetrimono()
     } else if (cells[activeTetrimono.cellCPosition].classList.contains('square-full')) {
-      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
-      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      fillSquares(-10)
       addActiveTetrimono()
     } else if (cells[activeTetrimono.cellDPosition].classList.contains('square-full')) {
-      // activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 10
-      cells[activeTetrimono.cellAPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellBPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellCPosition - 10].classList.add('square-full')
-      cells[activeTetrimono.cellDPosition - 10].classList.add('square-full')
+      fillSquares(-10)
       addActiveTetrimono()
     } else {
 
-      //* Turns the new Active Cell FULL
-      cells[activeTetrimono.cellAPosition].classList.add('square-full')
-      cells[activeTetrimono.cellBPosition].classList.add('square-full')
-      cells[activeTetrimono.cellCPosition].classList.add('square-full')
-      cells[activeTetrimono.cellDPosition].classList.add('square-full')
-
-
+      //* Turns the new Active Cell FULL      
+      fillSquares(0)
 
       //* Checks to see if the Active Cell is on the BOTTOM ROW:
       if (activeTetrimono.cellAPosition >= 190 && activeTetrimono.cellAPosition <= 199) {
@@ -170,39 +165,21 @@ function init() {
         cells[activeTetrimono.cellCPosition].classList.add('square-full')
         cells[activeTetrimono.cellDPosition].classList.add('square-full')
       }
-
     }
-
-
-
   }
 
-
-
+  //* Move LEFT active Tetrimono
   function moveLeftActiveTetrimono() {
     removeActiveTetrimono()
-    activeTetrimono.cellAPosition = activeTetrimono.cellAPosition - 1
-    activeTetrimono.cellBPosition = activeTetrimono.cellBPosition - 1
-    activeTetrimono.cellCPosition = activeTetrimono.cellCPosition - 1
-    activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 1
-
-    cells[activeTetrimono.cellAPosition].classList.add('square-full')
-    cells[activeTetrimono.cellBPosition].classList.add('square-full')
-    cells[activeTetrimono.cellCPosition].classList.add('square-full')
-    cells[activeTetrimono.cellDPosition].classList.add('square-full')
+    moveCells(-1)
+    fillSquares(0)
   }
 
+  //* Move Right active Tetrimono
   function moveRightActiveTetrimono() {
     removeActiveTetrimono()
-    activeTetrimono.cellAPosition = activeTetrimono.cellAPosition + 1
-    activeTetrimono.cellBPosition = activeTetrimono.cellBPosition + 1
-    activeTetrimono.cellCPosition = activeTetrimono.cellCPosition + 1
-    activeTetrimono.cellDPosition = activeTetrimono.cellDPosition + 1
-
-    cells[activeTetrimono.cellAPosition].classList.add('square-full')
-    cells[activeTetrimono.cellBPosition].classList.add('square-full')
-    cells[activeTetrimono.cellCPosition].classList.add('square-full')
-    cells[activeTetrimono.cellDPosition].classList.add('square-full')
+    moveCells(+1)
+    fillSquares(0)
   }
 
   function rotateActiveTetrimono() {
@@ -214,16 +191,13 @@ function init() {
       activeTetrimono.cellCPosition = activeTetrimono.cellCPosition - 10
       activeTetrimono.cellDPosition = activeTetrimono.cellDPosition - 21
 
-      cells[activeTetrimono.cellAPosition].classList.add('square-full')
-      cells[activeTetrimono.cellBPosition].classList.add('square-full')
-      cells[activeTetrimono.cellCPosition].classList.add('square-full')
-      cells[activeTetrimono.cellDPosition].classList.add('square-full')
+      fillSquares(0)
     }
   }
 
 
-  //* Move a shape
-
+  //* Move a shape with the keyboard
+  
   function handleKeyDown(event) {
 
 
@@ -265,7 +239,7 @@ function init() {
 
   // setInterval(() => {
   //   moveDownActiveTetrimono()
-  // }, 700)
+  // }, 300)
 
 
 }
