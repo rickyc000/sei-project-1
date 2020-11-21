@@ -73,7 +73,7 @@ function init() {
 
   function generateActiveTetrimono() {
     // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    activeTetrimonoShape = tetrimonoes[3]
+    activeTetrimonoShape = tetrimonoes[5]
     return activeTetrimonoShape
   }
 
@@ -300,23 +300,63 @@ function init() {
       }
     }
 
+
+
+
+
+
+
     if (activeTetrimonoShape.name === 'Hero') {
 
       if (activeTetrimono.orientation === 'default') {
         removeActiveTetrimono()
-        moveCells(0, 9, -20, -11)
+        moveCells(-19, -10, -1, 8)
         activeTetrimono.orientation = 'position two'
         fillSquares(0)
 
       } else {
         removeActiveTetrimono()
-        moveCells(0, -9, 20, 11)
+        moveCells(19, 10, 1, -8)
         activeTetrimono.orientation = 'default'
         fillSquares(0)
 
         //* ADD THE FULL ROTATION POSITIONS HERE
       }
     }
+
+
+
+
+
+    if (activeTetrimonoShape.name === 'Teewee') {
+
+      if (activeTetrimono.orientation === 'default') {
+        removeActiveTetrimono()
+        moveCells(60, 60, 60, 60)
+        activeTetrimono.orientation = 'left-side'
+        fillSquares(0)
+
+      } else if (activeTetrimono.orientation === 'left-side') {
+        removeActiveTetrimono()
+        moveCells(60, 60, 60, 60)
+        activeTetrimono.orientation = 'upside-down'
+        fillSquares(0)
+
+      } else if (activeTetrimono.orientation === 'upside-down') {
+        removeActiveTetrimono()
+        moveCells(60, 60, 60, 60)
+        activeTetrimono.orientation = 'right-side'
+        fillSquares(0)
+
+      } else {
+        removeActiveTetrimono()
+        moveCells(60, 60, 60, 60)
+        activeTetrimono.orientation = 'default'
+        fillSquares(0)
+      }
+    }
+
+
 
 
 
