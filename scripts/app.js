@@ -6,7 +6,6 @@ function init() {
 
   const width = 10
   const height = 20
-  // const cellCount = width * height
   const cells = []
   let activeTetrimonoShape = null
 
@@ -72,8 +71,8 @@ function init() {
   //* Generate a random shape
 
   function generateActiveTetrimono() {
-    activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    // activeTetrimonoShape = tetrimonoes[5]
+    // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+    activeTetrimonoShape = tetrimonoes[0]
     return activeTetrimonoShape
   }
 
@@ -163,36 +162,48 @@ function init() {
     }
   }
 
+
+
+
+
+  function checkingForFullSquares(cellA, cellB, cellC, cellD) {
+
+    if (cells[activeTetrimono.cellAPosition + cellA].classList.contains('square-full')
+      && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellBPosition]
+      && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellCPosition]
+      && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellDPosition]
+    ) {
+      return false
+    } else if (cells[activeTetrimono.cellBPosition + cellB].classList.contains('square-full')
+      && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellAPosition]
+      && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellCPosition]
+      && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellDPosition]
+    ) {
+      return false
+    } else if (cells[activeTetrimono.cellCPosition + cellC].classList.contains('square-full')
+      && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellAPosition]
+      && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellBPosition]
+      && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellDPosition]
+    ) {
+      return false
+    } else if (cells[activeTetrimono.cellDPosition + cellD].classList.contains('square-full')
+      && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellAPosition]
+      && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellBPosition]
+      && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellCPosition]
+    ) {
+      return false
+    } else {
+      return true
+    }
+  }
+
+
+
+
   //* Move LEFT active Tetrimono
   function moveLeftActiveTetrimono() {
 
-    //* Check to see if the cell next to it is FULL (and also not one of the other squares)
-
-    if (cells[activeTetrimono.cellAPosition - 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellAPosition - 1] !== cells[activeTetrimono.cellBPosition]
-      && cells[activeTetrimono.cellAPosition - 1] !== cells[activeTetrimono.cellCPosition]
-      && cells[activeTetrimono.cellAPosition - 1] !== cells[activeTetrimono.cellDPosition]
-    ) {
-      return
-    } else if (cells[activeTetrimono.cellBPosition - 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellBPosition - 1] !== cells[activeTetrimono.cellAPosition]
-      && cells[activeTetrimono.cellBPosition - 1] !== cells[activeTetrimono.cellCPosition]
-      && cells[activeTetrimono.cellBPosition - 1] !== cells[activeTetrimono.cellDPosition]
-    ) {
-      return
-    } else if (cells[activeTetrimono.cellCPosition - 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellCPosition - 1] !== cells[activeTetrimono.cellAPosition]
-      && cells[activeTetrimono.cellCPosition - 1] !== cells[activeTetrimono.cellBPosition]
-      && cells[activeTetrimono.cellCPosition - 1] !== cells[activeTetrimono.cellDPosition]
-    ) {
-      return
-    } else if (cells[activeTetrimono.cellDPosition - 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellDPosition - 1] !== cells[activeTetrimono.cellAPosition]
-      && cells[activeTetrimono.cellDPosition - 1] !== cells[activeTetrimono.cellBPosition]
-      && cells[activeTetrimono.cellDPosition - 1] !== cells[activeTetrimono.cellCPosition]
-    ) {
-      return
-    } else {
+    if (checkingForFullSquares(-1, -1, -1, -1)) {
 
       //* If it passes the above checks, if it then checks any of the cells are at the edge of the grid
       if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
@@ -208,6 +219,8 @@ function init() {
         moveCells(-1, -1, -1, -1)
         fillSquares(0)
       }
+    } else {
+      return
     }
   }
 
@@ -215,36 +228,7 @@ function init() {
 
   function moveRightActiveTetrimono() {
 
-    //* Check to see if the cell next to it is FULL (and also not one of the other squares)
-
-    if (cells[activeTetrimono.cellAPosition + 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellAPosition + 1] !== cells[activeTetrimono.cellBPosition]
-      && cells[activeTetrimono.cellAPosition + 1] !== cells[activeTetrimono.cellCPosition]
-      && cells[activeTetrimono.cellAPosition + 1] !== cells[activeTetrimono.cellDPosition]
-    ) {
-      return
-    } else if (cells[activeTetrimono.cellBPosition + 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellBPosition + 1] !== cells[activeTetrimono.cellAPosition]
-      && cells[activeTetrimono.cellBPosition + 1] !== cells[activeTetrimono.cellCPosition]
-      && cells[activeTetrimono.cellBPosition + 1] !== cells[activeTetrimono.cellDPosition]
-    ) {
-      return
-    } else if (cells[activeTetrimono.cellCPosition + 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellCPosition + 1] !== cells[activeTetrimono.cellAPosition]
-      && cells[activeTetrimono.cellCPosition + 1] !== cells[activeTetrimono.cellBPosition]
-      && cells[activeTetrimono.cellCPosition + 1] !== cells[activeTetrimono.cellDPosition]
-    ) {
-      return
-    } else if (cells[activeTetrimono.cellDPosition + 1].classList.contains('square-full')
-      && cells[activeTetrimono.cellDPosition + 1] !== cells[activeTetrimono.cellAPosition]
-      && cells[activeTetrimono.cellDPosition + 1] !== cells[activeTetrimono.cellBPosition]
-      && cells[activeTetrimono.cellDPosition + 1] !== cells[activeTetrimono.cellCPosition]
-    ) {
-      return
-    } else {
-
-
-      //* Check to see if any cells are the edge of the grid:
+    if (checkingForFullSquares(1, 1, 1, 1)) {
       if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
         return
       } else if (cells[activeTetrimono.cellBPosition].classList.contains('X10')) {
@@ -254,14 +238,17 @@ function init() {
       } else if (cells[activeTetrimono.cellDPosition].classList.contains('X10')) {
         return
       } else {
-        console.log('the other option')
         removeActiveTetrimono()
         moveCells(1, 1, 1, 1)
         fillSquares(0)
       }
+    } else {
+      return
     }
-
   }
+
+
+
 
   //* ROTATIONS for each of the different shapes:
 
@@ -270,28 +257,44 @@ function init() {
     if (activeTetrimonoShape.name === 'Orange Ricky') {
 
       if (activeTetrimono.orientation === 'default') {
-        removeActiveTetrimono()
-        moveCells(9, -20, -11, -2)
-        activeTetrimono.orientation = 'left-side'
-        fillSquares(0)
+        if (checkingForFullSquares(9, -20, -11, -2)) {
+          removeActiveTetrimono()
+          moveCells(9, -20, -11, -2)
+          activeTetrimono.orientation = 'left-side'
+          fillSquares(0)
+        } else {
+          return 
+        }
 
       } else if (activeTetrimono.orientation === 'left-side') {
-        removeActiveTetrimono()
-        moveCells(-1, 12, 1, -10)
-        activeTetrimono.orientation = 'upside-down'
-        fillSquares(0)
+        if (checkingForFullSquares(-11, 2, -9, -20)) {
+          removeActiveTetrimono()
+          moveCells(-11, 2, -9, -20)
+          activeTetrimono.orientation = 'upside-down'
+          fillSquares(0)
+        } else {
+          return
+        }
 
       } else if (activeTetrimono.orientation === 'upside-down') {
-        removeActiveTetrimono()
-        moveCells(-19, 10, 1, -8)
-        activeTetrimono.orientation = 'right-side'
-        fillSquares(0)
+        if (checkingForFullSquares(-9, 20, 11, 2)) {
+          removeActiveTetrimono()
+          moveCells(-9, 20, 11, 2)
+          activeTetrimono.orientation = 'right-side'
+          fillSquares(0)
+        } else {
+          return 
+        }
 
       } else {
-        removeActiveTetrimono()
-        moveCells(11, -2, 9, 20)
-        activeTetrimono.orientation = 'default'
-        fillSquares(0)
+        if (checkingForFullSquares(11, -2, 9, 20)) {
+          removeActiveTetrimono()
+          moveCells(11, -2, 9, 20)
+          activeTetrimono.orientation = 'default'
+          fillSquares(0)
+        } else {
+          return 
+        }
       }
     }
 
@@ -406,12 +409,9 @@ function init() {
         activeTetrimono.orientation = 'default'
         fillSquares(0)
       }
-    }
-
-    else {
+    } else {
       return
     }
-
 
   }
 
