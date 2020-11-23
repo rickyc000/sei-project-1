@@ -77,13 +77,78 @@ function init() {
     return activeTetrimonoShape
   }
 
+  const rows = []
+
+
+  //* LOOP to check for full rows of squares
+
+  function checkingForCompleteRows() {
+
+    const rows = []
+
+    for (let rowNumber = 1; rowNumber <= 19; rowNumber++) {
+
+      rows[rowNumber] = []
+      rows[rowNumber].length = 0
+
+      for (let cellNumber = rowNumber * 10; cellNumber <= rowNumber * 10 + 9; cellNumber++) {
+        if (cells[cellNumber].classList.contains('square-full')) {
+          rows[rowNumber].push(['square-full'])
+
+        } else {
+          // console.log(rowNumber)
+        }
+
+        if (rows[rowNumber].length === 10) {
+          console.log('Row number ' + rowNumber + ' is full')
+        } else {
+          // console.log(rowNumber)
+        }
+
+      }
+    }
+
+  }
+
+
+
+  // const rows[i] = []
+  // rows[i].length = 0
+  // const rowNumber = i
+  // for (let i = 1; i <= 10; i++) {
+  //   if (cells[i].classList.contains('square-full')) {
+  //     rowY20.push('square-full')
+  //   } else {
+  //     return
+  //   }
+  // }
+
+
+  //   const rowY20 = []
+  //   rowY20.length = 0
+  //   for (let i = 190; i <= 199; i++) {
+  //     if (cells[i].classList.contains('square-full')) {
+  //       rowY20.push('square-full')
+  //     } else {
+  //       return
+  //     }
+  //   }
+  //   if (rowY20.length === 10) {
+  //     console.log('row 20 is full')
+  //   } else {
+  //     return
+  //   }
+  // }
+
+
 
   //* Add a new shape to the top of the page
 
   function addActiveTetrimono() {
 
-    controlsEnabled = false 
+    controlsEnabled = false
 
+    checkingForCompleteRows()
 
     setTimeout(() => {
       const startingPosition = generateActiveTetrimono().defaultPosition
@@ -102,19 +167,6 @@ function init() {
       controlsEnabled = true
 
     }, 1000)
-
-    // const startingPosition = generateActiveTetrimono().defaultPosition
-
-    // cells[startingPosition[0]].classList.add('square-full')
-    // cells[startingPosition[1]].classList.add('square-full')
-    // cells[startingPosition[2]].classList.add('square-full')
-    // cells[startingPosition[3]].classList.add('square-full')
-
-    // activeTetrimono.cellAPosition = startingPosition[0]
-    // activeTetrimono.cellBPosition = startingPosition[1]
-    // activeTetrimono.cellCPosition = startingPosition[2]
-    // activeTetrimono.cellDPosition = startingPosition[3]
-    // activeTetrimono.orientation = 'default'
   }
   addActiveTetrimono()
 
@@ -516,6 +568,21 @@ function init() {
         break
     }
   }
+
+
+  // for (let i = 190; i <= 199; i++) {
+  //   if (cells[i].contains('square-full')) {
+  //     console.log(i + ' square full')
+  //   } else {
+  //     console.log(i + ' free')
+  //   }
+  // }
+
+
+
+
+
+
 
   //* Event listeners
 
