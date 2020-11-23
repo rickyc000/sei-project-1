@@ -77,68 +77,45 @@ function init() {
     return activeTetrimonoShape
   }
 
-  const rows = []
+
 
 
   //* LOOP to check for full rows of squares
 
   function checkingForCompleteRows() {
-
     const rows = []
-
+    const completeRows = []
     for (let rowNumber = 1; rowNumber <= 19; rowNumber++) {
-
       rows[rowNumber] = []
       rows[rowNumber].length = 0
-
       for (let cellNumber = rowNumber * 10; cellNumber <= rowNumber * 10 + 9; cellNumber++) {
         if (cells[cellNumber].classList.contains('square-full')) {
           rows[rowNumber].push(['square-full'])
-
         } else {
           // console.log(rowNumber)
         }
-
         if (rows[rowNumber].length === 10) {
           console.log('Row number ' + rowNumber + ' is full')
+          completeRows.push(rowNumber + 1)
         } else {
           // console.log(rowNumber)
         }
-
       }
     }
-
+    clearCompleteRows(completeRows)
   }
 
+  //* FUNCTION to drop a ROW when complete:
 
+  function clearCompleteRows(rowNumbers) {
 
-  // const rows[i] = []
-  // rows[i].length = 0
-  // const rowNumber = i
-  // for (let i = 1; i <= 10; i++) {
-  //   if (cells[i].classList.contains('square-full')) {
-  //     rowY20.push('square-full')
-  //   } else {
-  //     return
-  //   }
-  // }
+    if (rowNumbers.length === 0) {
+      console.log('do nothing!')
+    } else {
+      console.log(rowNumbers + ' time to clear some rows')
+    }
+  }
 
-
-  //   const rowY20 = []
-  //   rowY20.length = 0
-  //   for (let i = 190; i <= 199; i++) {
-  //     if (cells[i].classList.contains('square-full')) {
-  //       rowY20.push('square-full')
-  //     } else {
-  //       return
-  //     }
-  //   }
-  //   if (rowY20.length === 10) {
-  //     console.log('row 20 is full')
-  //   } else {
-  //     return
-  //   }
-  // }
 
 
 
