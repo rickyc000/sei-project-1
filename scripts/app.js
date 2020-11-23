@@ -72,7 +72,7 @@ function init() {
 
   function generateActiveTetrimono() {
     // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    activeTetrimonoShape = tetrimonoes[0]
+    activeTetrimonoShape = tetrimonoes[5]
     return activeTetrimonoShape
   }
 
@@ -172,26 +172,31 @@ function init() {
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellCPosition]
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellDPosition]
+      && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellAPosition]
     ) {
-      return false
+      console.log(cells[activeTetrimono.cellBPosition + cellA].classList + ' cell A ')
     } else if (cells[activeTetrimono.cellBPosition + cellB].classList.contains('square-full')
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellCPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellDPosition]
+      && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellBPosition]
     ) {
-      return false
+      // return false
+      console.log(cells[activeTetrimono.cellBPosition + cellB].classList + ' cell B ')
     } else if (cells[activeTetrimono.cellCPosition + cellC].classList.contains('square-full')
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellDPosition]
+      && cells[activeTetrimono.cellBPosition + cellC] !== cells[activeTetrimono.cellCPosition]
     ) {
-      return false
+      console.log(cells[activeTetrimono.cellBPosition + cellC].classList + ' cell C ')
     } else if (cells[activeTetrimono.cellDPosition + cellD].classList.contains('square-full')
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellCPosition]
+      && cells[activeTetrimono.cellBPosition + cellD] !== cells[activeTetrimono.cellDPosition]
     ) {
-      return false
+      console.log(cells[activeTetrimono.cellBPosition + cellB].classList + ' cell D ')
     } else {
       return true
     }
@@ -212,7 +217,7 @@ function init() {
         return
       } else if (cells[activeTetrimono.cellCPosition].classList.contains('X1')) {
         return
-      } else if (cells[activeTetrimono.cellCPosition].classList.contains('X1')) {
+      } else if (cells[activeTetrimono.cellDPosition].classList.contains('X1')) {
         return
       } else {
         removeActiveTetrimono()
@@ -248,171 +253,212 @@ function init() {
   }
 
 
+  //* Function to check for available spaces, MOVE if yes, RETURN nothing if no
+
+  function checkAndRotateTetrimono(cellA, cellB, cellC, cellD, orientation) {
+    if (checkingForFullSquares(cellA, cellB, cellC, cellD)) {
+      removeActiveTetrimono()
+      moveCells(cellA, cellB, cellC, cellD)
+      activeTetrimono.orientation = orientation
+      fillSquares(0)
+    } else {
+      return
+    }
+  }
+
+
+  //* ROTATION rules for ORANGE RICKY shape:
+  function rotateOrangeRicky() {
+
+    if (activeTetrimono.orientation === 'default') {
+      checkAndRotateTetrimono(9, -20, -11, -2, 'left-side')
+
+    } else if (activeTetrimono.orientation === 'left-side') {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {
+        checkAndRotateTetrimono(-11, 2, -9, -20, 'upside-down')
+      }
+
+    } else if (activeTetrimono.orientation === 'upside-down') {
+      checkAndRotateTetrimono(-9, 20, 11, 2, 'right-side')
+
+    } else {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+        return
+      } else {
+        checkAndRotateTetrimono(11, -2, 9, 20, 'default')
+      }
+    }
+  }
+
+
+
+  //* ROTATION rules for BLUE RICKY shape:
+
+  function rotateBlueRicky() {
+
+    if (activeTetrimono.orientation === 'default') {
+      checkAndRotateTetrimono(-9, -20, -11, -2, 'left-side')
+
+    } else if (activeTetrimono.orientation === 'left-side') {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {
+        checkAndRotateTetrimono(11, 2, -9, -20, 'upside-down')
+      }
+
+    } else if (activeTetrimono.orientation === 'upside-down') {
+      checkAndRotateTetrimono(9, 20, 11, 2, 'right-side')
+
+    } else {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+        return
+      } else {
+        checkAndRotateTetrimono(-11, -2, 9, 20, 'default')
+      }
+    }
+  }
+
+  //* ROTATION rules for CLEVELAND Z shape:
+
+  function rotateClevelandZ() {
+    if (activeTetrimono.orientation === 'default') {
+      checkAndRotateTetrimono(-9, 0, -11, -2, 'left-side')
+
+    } else if (activeTetrimono.orientation === 'left-side') {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {
+        checkAndRotateTetrimono(11, 0, -9, -20, 'upside-down')
+      }
+
+    } else if (activeTetrimono.orientation === 'upside-down') {
+      checkAndRotateTetrimono(9, 0, 11, 2, 'right-side')
+
+    } else {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+        return
+      } else {
+        checkAndRotateTetrimono(-11, 0, 9, 20, 'default')
+      }
+    }
+  }
+
+
+  //* ROTATION rules for Rhode Island Z:
+
+  function rotateRhodeIslandZ() {
+    if (activeTetrimono.orientation === 'default') {
+      checkAndRotateTetrimono(0, 9, -20, -11, 'left-side')
+
+    } else if (activeTetrimono.orientation === 'left-side') {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {
+        checkAndRotateTetrimono(0, -11, 2, -9, 'upside-down')
+      }
+
+    } else if (activeTetrimono.orientation === 'upside-down') {
+      checkAndRotateTetrimono(0, -9, 20, 11, 'right-side')
+
+    } else {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+        return
+      } else {
+        checkAndRotateTetrimono(0, 11, -2, 9, 'default')
+      }
+    }
+  }
+
+
+
+  //* ROTATION rules for HERO
+
+  function rotateHero() {
+
+//! Can't add this here because it needs to be written into the rules of certain orientations:
+// if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9) {
+//       return
+
+    if (activeTetrimono.orientation === 'default') {
+      checkAndRotateTetrimono(-19, -10, -1, 8, 'left-side')
+
+    } else if (activeTetrimono.orientation === 'left-side') {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1') || cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {
+        checkAndRotateTetrimono(12, 1, -10, -21, 'upside-down')
+      }
+
+    } else if (activeTetrimono.orientation === 'upside-down') {
+      checkAndRotateTetrimono(19, 10, 1, -8, 'right-side')
+
+    } else {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1') || cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {
+        checkAndRotateTetrimono(-12, -1, 10, 21, 'default')
+      }
+    }
+  }
+
+  //* ROTATION rules for TEEWEE shape
+
+  function rotateTeewee() {
+    if (activeTetrimono.orientation === 'default') {  
+      checkAndRotateTetrimono(0, -20, -11, -2, 'left-side')
+
+    } else if (activeTetrimono.orientation === 'left-side') {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+        return
+      } else {    
+        checkAndRotateTetrimono(0, 2, -9, -20, 'upside-down')
+
+      }
+    } else if (activeTetrimono.orientation === 'upside-down') {
+      checkAndRotateTetrimono(0, 20, 11, 2, 'right-side')
+      
+
+    } else {
+      if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+        return
+      } else {
+        checkAndRotateTetrimono(0, -2, 9, 20, 'default')
+      }
+    }
+  }
+
 
 
   //* ROTATIONS for each of the different shapes:
 
   function rotateActiveTetrimono() {
 
-    if (activeTetrimonoShape.name === 'Orange Ricky') {
-
-      if (activeTetrimono.orientation === 'default') {
-        if (checkingForFullSquares(9, -20, -11, -2)) {
-          removeActiveTetrimono()
-          moveCells(9, -20, -11, -2)
-          activeTetrimono.orientation = 'left-side'
-          fillSquares(0)
-        } else {
-          return 
-        }
-
-      } else if (activeTetrimono.orientation === 'left-side') {
-        if (checkingForFullSquares(-11, 2, -9, -20)) {
-          removeActiveTetrimono()
-          moveCells(-11, 2, -9, -20)
-          activeTetrimono.orientation = 'upside-down'
-          fillSquares(0)
-        } else {
-          return
-        }
-
-      } else if (activeTetrimono.orientation === 'upside-down') {
-        if (checkingForFullSquares(-9, 20, 11, 2)) {
-          removeActiveTetrimono()
-          moveCells(-9, 20, 11, 2)
-          activeTetrimono.orientation = 'right-side'
-          fillSquares(0)
-        } else {
-          return 
-        }
-
-      } else {
-        if (checkingForFullSquares(11, -2, 9, 20)) {
-          removeActiveTetrimono()
-          moveCells(11, -2, 9, 20)
-          activeTetrimono.orientation = 'default'
-          fillSquares(0)
-        } else {
-          return 
-        }
-      }
-    }
-
-
-    if (activeTetrimonoShape.name === 'Blue Ricky') {
-
-      if (activeTetrimono.orientation === 'default') {
-        removeActiveTetrimono()
-        moveCells(-9, -20, -11, -2)
-        activeTetrimono.orientation = 'left-side'
-        fillSquares(0)
-
-      } else if (activeTetrimono.orientation === 'left-side') {
-        removeActiveTetrimono()
-        moveCells(21, 12, 1, -10)
-        activeTetrimono.orientation = 'upside-down'
-        fillSquares(0)
-
-      } else if (activeTetrimono.orientation === 'upside-down') {
-        removeActiveTetrimono()
-        moveCells(-1, 10, 1, -8)
-        activeTetrimono.orientation = 'right-side'
-        fillSquares(0)
-
-      } else {
-        removeActiveTetrimono()
-        moveCells(-11, -2, 9, 20)
-        activeTetrimono.orientation = 'default'
-        fillSquares(0)
-      }
-    }
-
-    if (activeTetrimonoShape.name === 'Cleveland Z') {
-
-      if (activeTetrimono.orientation === 'default') {
-        removeActiveTetrimono()
-        moveCells(-9, 0, -11, -2)
-        activeTetrimono.orientation = 'position two'
-        fillSquares(0)
-
-      } else {
-        removeActiveTetrimono()
-        moveCells(9, 0, 11, 2)
-        activeTetrimono.orientation = 'default'
-        fillSquares(0)
-
-        //* ADD THE FULL ROTATION POSITIONS HERE
-      }
-    }
-
-    if (activeTetrimonoShape.name === 'Rhode Island Z') {
-
-      if (activeTetrimono.orientation === 'default') {
-        removeActiveTetrimono()
-        moveCells(0, 9, -20, -11)
-        activeTetrimono.orientation = 'position two'
-        fillSquares(0)
-
-      } else {
-        removeActiveTetrimono()
-        moveCells(0, -9, 20, 11)
-        activeTetrimono.orientation = 'default'
-        fillSquares(0)
-
-        //* ADD THE FULL ROTATION POSITIONS HERE
-      }
-    }
-
-
-    if (activeTetrimonoShape.name === 'Hero') {
-
-      if (activeTetrimono.orientation === 'default') {
-        removeActiveTetrimono()
-        moveCells(-19, -10, -1, 8)
-        activeTetrimono.orientation = 'position two'
-        fillSquares(0)
-
-      } else {
-        removeActiveTetrimono()
-        moveCells(19, 10, 1, -8)
-        activeTetrimono.orientation = 'default'
-        fillSquares(0)
-
-        //* ADD THE FULL ROTATION POSITIONS HERE
-      }
-    }
-
-
-    if (activeTetrimonoShape.name === 'Teewee') {
-
-      if (activeTetrimono.orientation === 'default') {
-        removeActiveTetrimono()
-        moveCells(0, -20, -11, -2)
-        activeTetrimono.orientation = 'left-side'
-        fillSquares(0)
-
-      } else if (activeTetrimono.orientation === 'left-side') {
-        removeActiveTetrimono()
-        moveCells(0, 2, -9, -20)
-        activeTetrimono.orientation = 'upside-down'
-        fillSquares(0)
-
-      } else if (activeTetrimono.orientation === 'upside-down') {
-        removeActiveTetrimono()
-        moveCells(0, 20, 11, 2)
-        activeTetrimono.orientation = 'right-side'
-        fillSquares(0)
-
-      } else {
-        removeActiveTetrimono()
-        moveCells(0, -2, 9, 20)
-        activeTetrimono.orientation = 'default'
-        fillSquares(0)
-      }
-    } else {
+    if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9) {
       return
+    } else {
+      if (activeTetrimonoShape.name === 'Orange Ricky') {
+        rotateOrangeRicky()
+      }
+      if (activeTetrimonoShape.name === 'Blue Ricky') {
+        rotateBlueRicky()
+      }
+      if (activeTetrimonoShape.name === 'Cleveland Z') {
+        rotateClevelandZ()
+      }
+      if (activeTetrimonoShape.name === 'Rhode Island Z') {
+        rotateRhodeIslandZ()
+      }
+      if (activeTetrimonoShape.name === 'Hero') {
+        rotateHero()
+      }
+      if (activeTetrimonoShape.name === 'Teewee') {
+        rotateTeewee()
+      } else {
+        return
+      }
     }
-
   }
 
 
