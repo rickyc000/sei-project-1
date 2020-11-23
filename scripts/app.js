@@ -72,8 +72,8 @@ function init() {
   //* Generate a random shape
 
   function generateActiveTetrimono() {
-    activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    // activeTetrimonoShape = tetrimonoes[5]
+    // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+    activeTetrimonoShape = tetrimonoes[1]
     return activeTetrimonoShape
   }
 
@@ -96,7 +96,7 @@ function init() {
         }
         if (rows[rowNumber].length === 10) {
           console.log('Row number ' + rowNumber + ' is full')
-          completeRows.push(rowNumber + 1)
+          completeRows.push(rowNumber)
         } else {
           // console.log(rowNumber)
         }
@@ -107,14 +107,48 @@ function init() {
 
   //* FUNCTION to drop a ROW when complete:
 
-  function clearCompleteRows(rowNumbers) {
+  function clearCompleteRows(rowNumbersToClear) {
 
-    if (rowNumbers.length === 0) {
+    if (rowNumbersToClear.length === 0) {
       console.log('do nothing!')
     } else {
-      console.log(rowNumbers + ' time to clear some rows')
+      console.log(rowNumbersToClear[0])
+
+
+
+
+      for (let i = rowNumbersToClear[0] * 10; i <= rowNumbersToClear[0] * 10 + 9; i++) {
+        cells[i].classList.remove('square-full')
+        cells[i].classList = cells[i - 10].classList
+        console.log('removing class from ' + cells[i])
+        cells[i - 10].classList.remove('square-full')
+
+        // }
+        // console.log(rowNumbers + ' time to clear some rows')
+      }
+
+
     }
   }
+
+  // ? PSUEDOCODE for complete row function:
+
+  //? When a row is completed
+  //? remove the square-full class from all cells in that row
+  //? take the class list from each cell - 10 (so the row above)
+  //? and add it to that row
+  //? for each of the rows above the completed row
+  //? do the same
+  //?
+  //?
+  //?
+
+  ////?
+  //?
+  //?
+  //?
+  //?
+  //?
 
 
 
@@ -143,7 +177,7 @@ function init() {
 
       controlsEnabled = true
 
-    }, 1000)
+    }, 200)
   }
   addActiveTetrimono()
 
@@ -207,16 +241,6 @@ function init() {
       }
     }
   }
-
-
-
-
-
-
-
-
-
-
 
 
 
