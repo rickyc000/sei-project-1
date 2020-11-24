@@ -78,8 +78,6 @@ function init() {
   }
 
 
-
-
   //* LOOP to check for full rows of squares
 
   function checkingForCompleteRows() {
@@ -110,7 +108,7 @@ function init() {
 
 
 
-  //* FUNCTION to drop a ROW when complete:
+  //* FUNCTION to clear a ROW when complete:
 
   function clearCompleteRows(rowNumbersToClear) {
 
@@ -124,79 +122,24 @@ function init() {
         return Math.max(acc, curr)
       })
 
-      console.log(rowNumbersToClear)
-      console.log(firstRowToClear)
-
       //* This then removes the square-full class from the cells in that row:
       //* Then adds the classList from the cell above 
 
       for (let i = firstRowToClear; i > 0; i--) {
-
         const rowToClear = i
-
         for (let i = rowToClear * 10; i <= rowToClear * 10 + 9; i++) {
           cells[i].classList.remove('square-full')
           cells[i].classList = cells[i - 10].classList
-          // console.log('removing class from ' + cells[i])
-          // console.log('testing the loop' + i + " i " + rowToClear + " row to clear")
         }
-
       }
 
-    
-      console.log(rowNumbersToClear + ' rowNumbers to Clear')
+      //* The function then clears the last row number from the array
+      //* And runs the check for complete rows again:
+
       rowNumbersToClear.pop()
-      console.log(rowNumbersToClear + ' after popped RowNumbers to Clear')
-
       checkingForCompleteRows()
-  
-      // if (rowNumbersToClear.length > 0) {
-      //   clearCompleteRows(rowNumbersToClear)
-      // } else {
-      //   console.log('clearCompleteRows function complete')
-        // for (let i = firstRowToClear * 10; i <= firstRowToClear * 10 + 9; i++) {
-        //   cells[i].classList.remove('square-full')
-        //   cells[i].classList = cells[i - 10].classList
-        //   console.log('removing class from ' + cells[i])
-        //   cells[i - 10].classList.remove('square-full')
-        // }
-
-      
     }
-      //* I want to do this to every row below first to clear until 0
-      //* And then pop this number from the array and repeat the clearComplete function
-      //* The scoring can be registered in the checkingForCompleteRows function 
-
-      // for (let i = firstRowToClear; i <= firstRowToClear)
-
-
-
-    }
-
-
-  
-
-
-  // ? PSUEDOCODE for complete row function:
-
-  //? When a row is completed
-  //? remove the square-full class from all cells in that row
-  //? take the class list from each cell - 10 (so the row above)
-  //? and add it to that row
-  //? for each of the rows above the completed row
-  //? do the same
-  //?
-  //?
-  //?
-
-  ////?
-  //?
-  //?
-  //?
-  //?
-  //?
-
-
+  }
 
 
   //* Add a new shape to the top of the page
@@ -223,10 +166,30 @@ function init() {
 
       controlsEnabled = true
 
+      gameOverCheck()
+
     }, 200)
+
+    
+    
+
   }
   addActiveTetrimono()
 
+
+
+  //* Checking for GAME OVER:
+
+  function gameOverCheck() {
+
+    if (checkingForFullSquares(10, 10, 10, 10)) {
+      return
+    } else {
+      console.log('GAME OVER!')
+      //* Deactivate the timer and add a pop out message here with the option to restart (refresh the page)
+    }
+
+  }  
 
 
   //* Remove a shape
@@ -287,10 +250,6 @@ function init() {
       }
     }
   }
-
-
-
-
 
 
   function checkingForFullSquares(cellA, cellB, cellC, cellD) {
