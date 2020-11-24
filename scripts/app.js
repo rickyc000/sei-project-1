@@ -4,11 +4,15 @@ function init() {
   // * Variables
   const grid = document.querySelector('.grid')
 
+  const startGameButton = document.querySelector('.start-button')
+
   const width = 10
   const height = 20
   const cells = []
   let activeTetrimonoShape = null
   let controlsEnabled = false
+
+  let gameInPlay = false
 
   //* Tetrimonoes:
 
@@ -22,7 +26,7 @@ function init() {
       name: 'Blue Ricky',
       defaultPosition: [3, 13, 14, 15],
       color: 'blue-ricky',
-      
+
     },
     {
       name: 'Cleveland Z',
@@ -76,6 +80,16 @@ function init() {
     }
   }
   createGrid()
+
+
+  //* Function to start the game:
+
+  function startGame() {
+    console.log('click click')
+    gameInPlay = true
+    addActiveTetrimono()
+    
+  }
 
 
   //* Generate a random shape
@@ -159,34 +173,72 @@ function init() {
 
     checkingForCompleteRows()
 
-    setTimeout(() => {
-      const startingTetrimono = generateActiveTetrimono()
+    if (gameInPlay === true) {
 
-      const startingPosition = startingTetrimono.defaultPosition
+      setTimeout(() => {
+        const startingTetrimono = generateActiveTetrimono()
+  
+        const startingPosition = startingTetrimono.defaultPosition
+  
+        console.log(startingPosition)
+        console.log(startingTetrimono.name)
+  
+        cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
+        cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
+        cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
+        cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
+  
+        activeTetrimono.cellAPosition = startingPosition[0]
+        activeTetrimono.cellBPosition = startingPosition[1]
+        activeTetrimono.cellCPosition = startingPosition[2]
+        activeTetrimono.cellDPosition = startingPosition[3]
+        activeTetrimono.orientation = 'default'
+        activeTetrimono.color = startingTetrimono.color
+  
+        controlsEnabled = true
+  
+        gameOverCheck()
+  
+      }, 200)
 
-      console.log(startingPosition)
-      console.log(startingTetrimono.name)
 
-      cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
-      cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
-      cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
-      cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
+    } else {
+      console.log('game not in play')
+    }
 
-      activeTetrimono.cellAPosition = startingPosition[0]
-      activeTetrimono.cellBPosition = startingPosition[1]
-      activeTetrimono.cellCPosition = startingPosition[2]
-      activeTetrimono.cellDPosition = startingPosition[3]
-      activeTetrimono.orientation = 'default'
-      activeTetrimono.color = startingTetrimono.color
+    // controlsEnabled = false
 
-      controlsEnabled = true
+    // checkingForCompleteRows()
 
-      gameOverCheck()
+    // setTimeout(() => {
+    //   const startingTetrimono = generateActiveTetrimono()
 
-    }, 200)
+    //   const startingPosition = startingTetrimono.defaultPosition
+
+    //   console.log(startingPosition)
+    //   console.log(startingTetrimono.name)
+
+    //   cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
+    //   cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
+    //   cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
+    //   cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
+
+    //   activeTetrimono.cellAPosition = startingPosition[0]
+    //   activeTetrimono.cellBPosition = startingPosition[1]
+    //   activeTetrimono.cellCPosition = startingPosition[2]
+    //   activeTetrimono.cellDPosition = startingPosition[3]
+    //   activeTetrimono.orientation = 'default'
+    //   activeTetrimono.color = startingTetrimono.color
+
+    //   controlsEnabled = true
+
+    //   gameOverCheck()
+
+    // }, 200)
 
   }
-  addActiveTetrimono()
+
+
 
 
 
@@ -197,11 +249,13 @@ function init() {
     if (checkingForFullSquares(10, 10, 10, 10)) {
       return
     } else {
+
+      gameInPlay = false
       console.log('GAME OVER!')
       //* Deactivate the timer and add a pop out message here with the option to restart (refresh the page)
     }
 
-  }  
+  }
 
 
   //* Remove a shape
@@ -606,7 +660,7 @@ function init() {
 
   document.addEventListener('keydown', handleKeyDown)
 
-  // console.log('test')
+  startGameButton.addEventListener('click', startGame)
 
 
 
