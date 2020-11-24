@@ -14,6 +14,14 @@ function init() {
 
   let gameInPlay = false
 
+
+  let timerId = null
+
+
+ 
+
+  
+
   //* Tetrimonoes:
 
   const tetrimonoes = [
@@ -88,7 +96,7 @@ function init() {
     console.log('click click')
     gameInPlay = true
     addActiveTetrimono()
-    
+
   }
 
 
@@ -169,73 +177,53 @@ function init() {
 
   function addActiveTetrimono() {
 
+    clearInterval(timerId)
+
     controlsEnabled = false
 
-    checkingForCompleteRows()
+    // checkingForCompleteRows()
 
     if (gameInPlay === true) {
 
+      checkingForCompleteRows()
+
+      //* Slight pause before generating:
       setTimeout(() => {
         const startingTetrimono = generateActiveTetrimono()
-  
+
         const startingPosition = startingTetrimono.defaultPosition
-  
+
         console.log(startingPosition)
         console.log(startingTetrimono.name)
-  
+
         cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
         cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
         cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
         cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
-  
+
         activeTetrimono.cellAPosition = startingPosition[0]
         activeTetrimono.cellBPosition = startingPosition[1]
         activeTetrimono.cellCPosition = startingPosition[2]
         activeTetrimono.cellDPosition = startingPosition[3]
         activeTetrimono.orientation = 'default'
         activeTetrimono.color = startingTetrimono.color
-  
+
         controlsEnabled = true
-  
+
         gameOverCheck()
-  
+
+        timerId = setInterval(() => {
+          moveDownActiveTetrimono()
+          console.log(timerId)
+        }, 400)
+
       }, 200)
+
 
 
     } else {
       console.log('game not in play')
     }
-
-    // controlsEnabled = false
-
-    // checkingForCompleteRows()
-
-    // setTimeout(() => {
-    //   const startingTetrimono = generateActiveTetrimono()
-
-    //   const startingPosition = startingTetrimono.defaultPosition
-
-    //   console.log(startingPosition)
-    //   console.log(startingTetrimono.name)
-
-    //   cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
-    //   cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
-    //   cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
-    //   cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
-
-    //   activeTetrimono.cellAPosition = startingPosition[0]
-    //   activeTetrimono.cellBPosition = startingPosition[1]
-    //   activeTetrimono.cellCPosition = startingPosition[2]
-    //   activeTetrimono.cellDPosition = startingPosition[3]
-    //   activeTetrimono.orientation = 'default'
-    //   activeTetrimono.color = startingTetrimono.color
-
-    //   controlsEnabled = true
-
-    //   gameOverCheck()
-
-    // }, 200)
-
   }
 
 
@@ -359,6 +347,8 @@ function init() {
 
   //* Move LEFT active Tetrimono
   function moveLeftActiveTetrimono() {
+
+    
 
     if (checkingForFullSquares(-1, -1, -1, -1)) {
 
@@ -642,15 +632,6 @@ function init() {
   }
 
 
-  // for (let i = 190; i <= 199; i++) {
-  //   if (cells[i].contains('square-full')) {
-  //     console.log(i + ' square full')
-  //   } else {
-  //     console.log(i + ' free')
-  //   }
-  // }
-
-
 
 
 
@@ -670,9 +651,6 @@ function init() {
   //   moveDownActiveTetrimono()
   // }, 1000)
 
-  // setInterval(() => {
-  //   moveDownActiveTetrimono()
-  // }, 300)
 
 
 }
