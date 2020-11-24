@@ -31,3 +31,14 @@
 .grid div.square-full {
   background-color: lightcoral;
 }
+
+.grid div.square-full.teewee {
+  background-color: red;
+}
+
+.grid div.square-full.blue-ricky {
+  background-color: rgb(0, 132, 255);
+}
+
+/* body > main > div > div > div.Y2.X6.square-full.blue-ricky
+ */

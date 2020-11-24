@@ -16,30 +16,38 @@ function init() {
     {
       name: 'Orange Ricky',
       defaultPosition: [6, 14, 15, 16],
+      color: 'orange-ricky',
     },
     {
       name: 'Blue Ricky',
       defaultPosition: [3, 13, 14, 15],
+      color: 'blue-ricky',
+      
     },
     {
       name: 'Cleveland Z',
       defaultPosition: [4, 5, 15, 16],
+      color: 'cleveland-z',
     },
     {
       name: 'Rhode Island Z',
       defaultPosition: [4, 5, 13, 14],
+      color: 'rhode-island-z',
     },
     {
       name: 'Hero',
       defaultPosition: [3, 4, 5, 6],
+      color: 'hero',
     },
     {
       name: 'Teewee',
       defaultPosition: [4, 13, 14, 15],
+      color: 'teewee',
     },
     {
       name: 'Smashboy',
       defaultPosition: [4, 5, 14, 15],
+      color: 'smashboy',
     }
   ]
 
@@ -151,12 +159,17 @@ function init() {
     checkingForCompleteRows()
 
     setTimeout(() => {
-      const startingPosition = generateActiveTetrimono().defaultPosition
+      const startingTetrimono = generateActiveTetrimono()
 
-      cells[startingPosition[0]].classList.add('square-full')
-      cells[startingPosition[1]].classList.add('square-full')
-      cells[startingPosition[2]].classList.add('square-full')
-      cells[startingPosition[3]].classList.add('square-full')
+      const startingPosition = startingTetrimono.defaultPosition
+
+      console.log(startingPosition)
+      console.log(startingTetrimono.name)
+
+      cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
+      cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
+      cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
+      cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
 
       activeTetrimono.cellAPosition = startingPosition[0]
       activeTetrimono.cellBPosition = startingPosition[1]
@@ -169,9 +182,6 @@ function init() {
       gameOverCheck()
 
     }, 200)
-
-    
-    
 
   }
   addActiveTetrimono()
