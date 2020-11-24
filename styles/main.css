@@ -32,13 +32,31 @@
   background-color: lightcoral;
 }
 
-.grid div.square-full.teewee {
-  background-color: red;
+.grid div.square-full.orange-ricky {
+  background-color: orange;
 }
 
 .grid div.square-full.blue-ricky {
-  background-color: rgb(0, 132, 255);
+  background-color: navy;
 }
 
-/* body > main > div > div > div.Y2.X6.square-full.blue-ricky
- */
+.grid div.square-full.cleveland-z {
+  background-color: green;
+}
+
+.grid div.square-full.rhode-island-z {
+  background-color: royalblue;
+}
+
+.grid div.square-full.hero {
+  background-color: lawngreen
+}
+
+.grid div.square-full.teewee {
+  background-color: yellow;
+}
+
+.grid div.square-full.smashboy {
+  background-color: purple;
+}
+

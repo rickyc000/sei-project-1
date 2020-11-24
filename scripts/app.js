@@ -60,6 +60,7 @@ function init() {
     cellCPosition: null,
     cellDPosition: null,
     orientation: 'default',
+    color: '',
   }
 
 
@@ -176,6 +177,7 @@ function init() {
       activeTetrimono.cellCPosition = startingPosition[2]
       activeTetrimono.cellDPosition = startingPosition[3]
       activeTetrimono.orientation = 'default'
+      activeTetrimono.color = startingTetrimono.color
 
       controlsEnabled = true
 
@@ -204,10 +206,10 @@ function init() {
 
   //* Remove a shape
   function removeActiveTetrimono() {
-    cells[activeTetrimono.cellAPosition].classList.remove('square-full')
-    cells[activeTetrimono.cellBPosition].classList.remove('square-full')
-    cells[activeTetrimono.cellCPosition].classList.remove('square-full')
-    cells[activeTetrimono.cellDPosition].classList.remove('square-full')
+    cells[activeTetrimono.cellAPosition].classList.remove('square-full', activeTetrimono.color)
+    cells[activeTetrimono.cellBPosition].classList.remove('square-full', activeTetrimono.color)
+    cells[activeTetrimono.cellCPosition].classList.remove('square-full', activeTetrimono.color)
+    cells[activeTetrimono.cellDPosition].classList.remove('square-full', activeTetrimono.color)
   }
 
 
@@ -223,10 +225,10 @@ function init() {
 
   //* Fills a block of squares (-10 used for when the block becomes stationary, filling the squares above)
   function fillSquares(number) {
-    cells[activeTetrimono.cellAPosition + number].classList.add('square-full')
-    cells[activeTetrimono.cellBPosition + number].classList.add('square-full')
-    cells[activeTetrimono.cellCPosition + number].classList.add('square-full')
-    cells[activeTetrimono.cellDPosition + number].classList.add('square-full')
+    cells[activeTetrimono.cellAPosition + number].classList.add('square-full', activeTetrimono.color)
+    cells[activeTetrimono.cellBPosition + number].classList.add('square-full', activeTetrimono.color)
+    cells[activeTetrimono.cellCPosition + number].classList.add('square-full', activeTetrimono.color)
+    cells[activeTetrimono.cellDPosition + number].classList.add('square-full', activeTetrimono.color)
   }
 
 
