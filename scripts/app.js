@@ -127,12 +127,10 @@ function init() {
       console.log(rowNumbersToClear)
       console.log(firstRowToClear)
 
-
       //* This then removes the square-full class from the cells in that row:
       //* Then adds the classList from the cell above 
 
-
-      for (let i = firstRowToClear; i >= 0; i--) {
+      for (let i = firstRowToClear; i > 0; i--) {
 
         const rowToClear = i
 
@@ -140,9 +138,22 @@ function init() {
           cells[i].classList.remove('square-full')
           cells[i].classList = cells[i - 10].classList
           // console.log('removing class from ' + cells[i])
-          // console.log('testing the loop' + i)
+          // console.log('testing the loop' + i + " i " + rowToClear + " row to clear")
         }
 
+      }
+
+    
+      console.log(rowNumbersToClear + ' rowNumbers to Clear')
+      rowNumbersToClear.pop()
+      console.log(rowNumbersToClear + ' after popped RowNumbers to Clear')
+
+      checkingForCompleteRows()
+  
+      // if (rowNumbersToClear.length > 0) {
+      //   clearCompleteRows(rowNumbersToClear)
+      // } else {
+      //   console.log('clearCompleteRows function complete')
         // for (let i = firstRowToClear * 10; i <= firstRowToClear * 10 + 9; i++) {
         //   cells[i].classList.remove('square-full')
         //   cells[i].classList = cells[i - 10].classList
@@ -150,8 +161,8 @@ function init() {
         //   cells[i - 10].classList.remove('square-full')
         // }
 
-      }
-
+      
+    }
       //* I want to do this to every row below first to clear until 0
       //* And then pop this number from the array and repeat the clearComplete function
       //* The scoring can be registered in the checkingForCompleteRows function 
@@ -163,7 +174,7 @@ function init() {
     }
 
 
-  }
+  
 
 
   // ? PSUEDOCODE for complete row function:
