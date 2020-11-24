@@ -72,8 +72,8 @@ function init() {
   //* Generate a random shape
 
   function generateActiveTetrimono() {
-    // activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    activeTetrimonoShape = tetrimonoes[1]
+    activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+    // activeTetrimonoShape = tetrimonoes[1]
     return activeTetrimonoShape
   }
 
@@ -102,34 +102,69 @@ function init() {
         }
       }
     }
+
+    //* This then passes an ARRAY of any rows that need clearing:
+    console.log(completeRows)
     clearCompleteRows(completeRows)
   }
+
+
 
   //* FUNCTION to drop a ROW when complete:
 
   function clearCompleteRows(rowNumbersToClear) {
 
+    //* If the array is empty, then nothing happens
     if (rowNumbersToClear.length === 0) {
       console.log('do nothing!')
     } else {
-      console.log(rowNumbersToClear[0])
+
+      //* This then finds the HIGHEST number in the array:      
+      const firstRowToClear = rowNumbersToClear.reduce((acc, curr) => {
+        return Math.max(acc, curr)
+      })
+
+      console.log(rowNumbersToClear)
+      console.log(firstRowToClear)
 
 
+      //* This then removes the square-full class from the cells in that row:
+      //* Then adds the classList from the cell above 
 
 
-      for (let i = rowNumbersToClear[0] * 10; i <= rowNumbersToClear[0] * 10 + 9; i++) {
-        cells[i].classList.remove('square-full')
-        cells[i].classList = cells[i - 10].classList
-        console.log('removing class from ' + cells[i])
-        cells[i - 10].classList.remove('square-full')
+      for (let i = firstRowToClear; i >= 0; i--) {
 
+        const rowToClear = i
+
+        for (let i = rowToClear * 10; i <= rowToClear * 10 + 9; i++) {
+          cells[i].classList.remove('square-full')
+          cells[i].classList = cells[i - 10].classList
+          // console.log('removing class from ' + cells[i])
+          // console.log('testing the loop' + i)
+        }
+
+        // for (let i = firstRowToClear * 10; i <= firstRowToClear * 10 + 9; i++) {
+        //   cells[i].classList.remove('square-full')
+        //   cells[i].classList = cells[i - 10].classList
+        //   console.log('removing class from ' + cells[i])
+        //   cells[i - 10].classList.remove('square-full')
         // }
-        // console.log(rowNumbers + ' time to clear some rows')
+
       }
+
+      //* I want to do this to every row below first to clear until 0
+      //* And then pop this number from the array and repeat the clearComplete function
+      //* The scoring can be registered in the checkingForCompleteRows function 
+
+      // for (let i = firstRowToClear; i <= firstRowToClear)
+
 
 
     }
+
+
   }
+
 
   // ? PSUEDOCODE for complete row function:
 
