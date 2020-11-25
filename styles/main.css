@@ -42,12 +42,15 @@ body {
 .start-reset-game {
   /* background-color: mistyrose; */
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 500px;
 }
 
-.start-button {
+.start-button, .reset-button {
   /* background-color: lightblue; */
   height: 100px;
+  width: 300px;
   padding: 20px;
   cursor: pointer;
   background-color: rgb(248, 238, 225);
