@@ -67,6 +67,14 @@ body {
   /* background-color: salmon; */
 }
 
+.up-next-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgb(232, 161, 70);
+  /* background-color: salmon; */
+}
+
 .grid {
   /* align-items: center; */
   /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2); */
@@ -79,7 +87,21 @@ body {
   width: 400px;
 }
 
-.grid div {
+.up-next-grid {
+  /* align-items: center; */
+  /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2); */
+  background: linear-gradient( rgb(248, 238, 225), rgb(25, 44, 56));
+  display: flex;
+  flex-wrap: wrap;
+  /* height: 200%; */
+  justify-content: center;
+  height: 200px;
+  width: 200px;
+}
+
+
+
+.grid div, .up-next-grid div {
   border: 1px solid rgb(232, 161, 70);
   /* background-color: rgb(248, 238, 225); */
   /* flex-grow: .5; */

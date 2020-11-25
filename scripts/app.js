@@ -3,18 +3,21 @@ function init() {
 
   // * Variables
   const grid = document.querySelector('.grid')
+  const upNextGrid = document.querySelector('.up-next-grid')
+
+  console.log(upNextGrid)
 
   const startGameButton = document.querySelector('.start-button')
   const resetGameButton = document.querySelector('.reset-button')
   const scoreDisplay = document.querySelector('.score-display')
   const levelDisplay = document.querySelector('.level-display')
 
-  console.log(scoreDisplay)
-  console.log(levelDisplay)
 
   const width = 10
   const height = 20
   const cells = []
+  const upNextCells = []
+
   let activeTetrimonoShape = null
   let controlsEnabled = false
 
@@ -29,6 +32,8 @@ function init() {
 
   scoreDisplay.textContent = totalScore
   levelDisplay.textContent = levelTotal
+
+
 
   //* Tetrimonoes:
 
@@ -84,7 +89,7 @@ function init() {
   }
 
 
-  // * Make a grid
+  // * Make a grid:
   function createGrid() {
     for (let row = 1; row <= height; row++) {
       for (let column = 1; column <= width; column++) {
@@ -97,6 +102,19 @@ function init() {
   }
   createGrid()
 
+  //* Make the UP NEXT grid:
+
+  function createUpNextGrid() {
+    for (let i = 0; i <= 20; i++) {
+      const upNextCell = document.createElement('div')
+      upNextCell.textContent = i
+      upNextGrid.appendChild(upNextCell)
+      upNextCells.push(upNextCell)
+    }
+
+  }
+
+  createUpNextGrid()
 
   //* Function to start the game:
 
@@ -120,10 +138,27 @@ function init() {
     levelTotal = 1
     levelDisplay.textContent = levelTotal
 
-
+    removeCellClasses()
     console.log(gameInPlay)
 
   }
+
+  //* Resets all cell classes:
+
+  function removeCellClasses() {
+    for (let i = 0; i < 200; i++) {
+      cells[i].classList.remove('square-full')
+
+      cells[i].classList.remove('orange-ricky')
+      cells[i].classList.remove('blue-ricky')
+      cells[i].classList.remove('cleveland-z')
+      cells[i].classList.remove('rhode-island-z')
+      cells[i].classList.remove('hero')
+      cells[i].classList.remove('teewee')
+      cells[i].classList.remove('smashboy')
+    }
+  }
+
 
 
   //* Generate a random shape
@@ -133,6 +168,9 @@ function init() {
     // activeTetrimonoShape = tetrimonoes[1]
     return activeTetrimonoShape
   }
+
+
+
 
 
   //* LOOP to check for full rows of squares
@@ -714,8 +752,6 @@ function init() {
   // setTimeout(() => {
   //   moveDownActiveTetrimono()
   // }, 1000)
-
-
 
 }
 
