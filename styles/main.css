@@ -128,6 +128,9 @@ body {
 
 
 
+
+
+
 /* RIGHT PANEL  */
 
 .right-panel {
@@ -174,12 +177,46 @@ body {
 }
 
 .up-next-grid div {
-  border: 1px solid rgb(232, 161, 70);
+  /* border: 1px solid rgb(232, 161, 70); */
   /* background-color: rgb(248, 238, 225); */
   /* flex-grow: .5; */
   width: 20%;
   height: 25%;
+  font-size: small;
   
   /* padding: 2px; */
 }
 
+/* UP NEXT GRID */
+
+.up-next-grid div.square-full {
+  background-color: lightcoral;
+}
+
+.up-next-grid div.square-full.orange-ricky {
+  background-color: rgb(226, 84, 57);
+}
+
+.up-next-grid div.square-full.blue-ricky {
+  background-color: rgb(195, 88, 229);
+}
+
+.up-next-grid div.square-full.cleveland-z {
+  background-color: rgb(223, 210, 72);
+}
+
+.up-next-grid div.square-full.rhode-island-z {
+  background-color: rgb(232, 161, 70);
+}
+
+.up-next-grid div.square-full.hero {
+  background-color: rgb(87, 189, 174);
+}
+
+.up-next-grid div.square-full.teewee {
+  background-color: rgb(222, 224, 166);
+}
+
+.up-next-grid div.square-full.smashboy {
+  background-color: rgb(217, 177, 216);
+}

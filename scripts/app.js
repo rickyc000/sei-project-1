@@ -12,13 +12,13 @@ function init() {
   const scoreDisplay = document.querySelector('.score-display')
   const levelDisplay = document.querySelector('.level-display')
 
-
   const width = 10
   const height = 20
   const cells = []
   const upNextCells = []
 
   let activeTetrimonoShape = null
+  let upNextTetrimonoShape = null
   let controlsEnabled = false
 
   let gameInPlay = false
@@ -33,45 +33,50 @@ function init() {
   scoreDisplay.textContent = totalScore
   levelDisplay.textContent = levelTotal
 
-
-
   //* Tetrimonoes:
 
   const tetrimonoes = [
     {
       name: 'Orange Ricky',
       defaultPosition: [6, 14, 15, 16],
+      upNextPosition: [8, 11, 12, 13],
       color: 'orange-ricky',
     },
     {
       name: 'Blue Ricky',
       defaultPosition: [3, 13, 14, 15],
+      upNextPosition: [6, 11, 12, 13],
       color: 'blue-ricky',
 
     },
     {
       name: 'Cleveland Z',
       defaultPosition: [4, 5, 15, 16],
+      upNextPosition: [6, 7, 12, 13],
       color: 'cleveland-z',
     },
     {
       name: 'Rhode Island Z',
       defaultPosition: [4, 5, 13, 14],
+      upNextPosition: [7, 8, 11, 12],
       color: 'rhode-island-z',
     },
     {
       name: 'Hero',
       defaultPosition: [3, 4, 5, 6],
+      upNextPosition: [10, 11, 12, 13],
       color: 'hero',
     },
     {
       name: 'Teewee',
       defaultPosition: [4, 13, 14, 15],
+      upNextPosition: [7, 11, 12, 13],
       color: 'teewee',
     },
     {
       name: 'Smashboy',
       defaultPosition: [4, 5, 14, 15],
+      upNextPosition: [7, 8, 12, 13],
       color: 'smashboy',
     }
   ]
@@ -102,8 +107,8 @@ function init() {
   }
   createGrid()
 
-  //* Make the UP NEXT grid:
 
+  //* Make the UP NEXT grid:
   function createUpNextGrid() {
     for (let i = 0; i < 20; i++) {
       const upNextCell = document.createElement('div')
@@ -111,20 +116,20 @@ function init() {
       upNextGrid.appendChild(upNextCell)
       upNextCells.push(upNextCell)
     }
-
   }
-
   createUpNextGrid()
 
-  //* Function to start the game:
 
+  //* Function to start the game:
   function startGame() {
     gameInPlay = true
+    generateUpNextTetrimono()
+    addUpNextTetrimono()
     addActiveTetrimono()
   }
 
-  //* Function to reset the game:
 
+  //* Function to reset the game:
   function resetGame() {
     console.log(gameInPlay)
     console.log('reset game')
@@ -139,12 +144,12 @@ function init() {
     levelDisplay.textContent = levelTotal
 
     removeCellClasses()
+    removeUpNextCellClasses()
     console.log(gameInPlay)
-
   }
 
-  //* Resets all cell classes:
 
+  //* Resets all cell classes:
   function removeCellClasses() {
     for (let i = 0; i < 200; i++) {
       cells[i].classList.remove('square-full')
@@ -159,17 +164,40 @@ function init() {
     }
   }
 
+  function removeUpNextCellClasses() {
+    for (let i = 0; i < 20; i++) {
+      upNextCells[i].classList.remove('square-full')
+
+      upNextCells[i].classList.remove('orange-ricky')
+      upNextCells[i].classList.remove('blue-ricky')
+      upNextCells[i].classList.remove('cleveland-z')
+      upNextCells[i].classList.remove('rhode-island-z')
+      upNextCells[i].classList.remove('hero')
+      upNextCells[i].classList.remove('teewee')
+      upNextCells[i].classList.remove('smashboy')
+    }
+  }
 
 
   //* Generate a random shape
 
-  function generateActiveTetrimono() {
-    activeTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+  function generateUpNextTetrimono() {
+    upNextTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
+    console.log(upNextTetrimonoShape.name + ' has been generated.')
     // activeTetrimonoShape = tetrimonoes[1]
-    return activeTetrimonoShape
   }
 
 
+  //* Add the up next Tetrimono:
+  function addUpNextTetrimono() {
+    removeUpNextCellClasses()
+    const upNextPosition = upNextTetrimonoShape.upNextPosition
+    console.log(upNextPosition)
+    upNextCells[upNextPosition[0]].classList.add('square-full', upNextTetrimonoShape.color)
+    upNextCells[upNextPosition[1]].classList.add('square-full', upNextTetrimonoShape.color)
+    upNextCells[upNextPosition[2]].classList.add('square-full', upNextTetrimonoShape.color)
+    upNextCells[upNextPosition[3]].classList.add('square-full', upNextTetrimonoShape.color)
+  }
 
 
 
@@ -254,7 +282,6 @@ function init() {
   function addActiveTetrimono() {
 
     clearInterval(timerId)
-
     controlsEnabled = false
 
     // checkingForCompleteRows()
@@ -263,34 +290,41 @@ function init() {
 
       checkingForCompleteRows()
 
-      //* Slight pause before generating:
-      setTimeout(() => {
-        const startingTetrimono = generateActiveTetrimono()
 
-        const startingPosition = startingTetrimono.defaultPosition
 
-        cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
-        cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
-        cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
-        cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
+      activeTetrimonoShape = upNextTetrimonoShape
 
-        activeTetrimono.cellAPosition = startingPosition[0]
-        activeTetrimono.cellBPosition = startingPosition[1]
-        activeTetrimono.cellCPosition = startingPosition[2]
-        activeTetrimono.cellDPosition = startingPosition[3]
-        activeTetrimono.orientation = 'default'
-        activeTetrimono.color = startingTetrimono.color
+      const startingTetrimono = upNextTetrimonoShape
+      const startingPosition = startingTetrimono.defaultPosition
 
-        controlsEnabled = true
+      cells[startingPosition[0]].classList.add('square-full', startingTetrimono.color)
+      cells[startingPosition[1]].classList.add('square-full', startingTetrimono.color)
+      cells[startingPosition[2]].classList.add('square-full', startingTetrimono.color)
+      cells[startingPosition[3]].classList.add('square-full', startingTetrimono.color)
 
-        gameOverCheck()
+      activeTetrimono.cellAPosition = startingPosition[0]
+      activeTetrimono.cellBPosition = startingPosition[1]
+      activeTetrimono.cellCPosition = startingPosition[2]
+      activeTetrimono.cellDPosition = startingPosition[3]
+      activeTetrimono.orientation = 'default'
+      activeTetrimono.color = startingTetrimono.color
 
-        timerId = setInterval(() => {
-          moveDownActiveTetrimono()
-          console.log(timerId + ' timerId')
-        }, 400)
+      controlsEnabled = true
 
-      }, 200)
+      gameOverCheck()
+
+      // generateUpNextTetrimono()
+      // addUpNextTetrimono()
+
+
+      timerId = setInterval(() => {
+        moveDownActiveTetrimono()
+        console.log(timerId + ' timerId')
+      }, 400)
+
+      generateUpNextTetrimono()
+      addUpNextTetrimono()
+
 
 
 
@@ -654,7 +688,6 @@ function init() {
       }
     } else if (activeTetrimono.orientation === 'upside-down') {
       checkAndRotateTetrimono(0, 20, 11, 2, 'right-side')
-
 
     } else {
       if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
