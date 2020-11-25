@@ -1,27 +1,38 @@
 * {
   box-sizing: border-box;
+  font-family: 'Space Grotesk', sans-serif;
+  color: rgb(25, 44, 56);
+  text-transform: uppercase;
+  font-style: italic;
+  font-size: 40px;
 }
 
 main {
   display: flex;
   justify-content: space-around;
+  /* background: linear-gradient(rgb(232, 161, 70),  rgb(25, 44, 56)); */
 }
 
 header {
-  background-color: plum;
+  /* background-color:rgb(232, 161, 70); */
   height: 50px;
 }
 
 
 footer {
-  background-color: peachpuff;
+  /* background-color: rgb(25, 44, 56); */
   height: 50px;
 }
 
+body {
+  background: linear-gradient(rgb(232, 161, 70), rgb(25, 44, 56));
+}
+
 /* LEFT PANEL  */
+/* rgb(232, 161, 70); */
 
 .left-panel {
-  background-color: beige;
+  /* background: linear-gradient(rgb(232, 161, 70),  rgb(25, 44, 56)); */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -29,16 +40,17 @@ footer {
 }
 
 .start-reset-game {
-  background-color: mistyrose;
+  /* background-color: mistyrose; */
   display: flex;
   justify-content: center;
 }
 
 .start-button {
-  background-color: lightblue;
+  /* background-color: lightblue; */
   height: 100px;
   padding: 20px;
   cursor: pointer;
+  background-color: rgb(248, 238, 225);
 }
 
 
@@ -48,12 +60,14 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: salmon;
+  border: 1px solid rgb(232, 161, 70);
+  /* background-color: salmon; */
 }
 
 .grid {
   /* align-items: center; */
   /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2); */
+  background: linear-gradient( rgb(248, 238, 225), rgb(25, 44, 56));
   display: flex;
   flex-wrap: wrap;
   /* height: 200%; */
@@ -63,11 +77,12 @@ footer {
 }
 
 .grid div {
-  border: 1px solid lightgrey;
-  background-color: skyblue;
+  border: 1px solid rgb(232, 161, 70);
+  /* background-color: rgb(248, 238, 225); */
   /* flex-grow: .5; */
   height: 5%;
   width: 10%;
+  padding: 2px;
 }
 
 .grid div.square-full {
@@ -75,31 +90,31 @@ footer {
 }
 
 .grid div.square-full.orange-ricky {
-  background-color: orange;
+  background-color: rgb(226, 84, 57);
 }
 
 .grid div.square-full.blue-ricky {
-  background-color: navy;
+  background-color: rgb(195, 88, 229);
 }
 
 .grid div.square-full.cleveland-z {
-  background-color: green;
+  background-color: rgb(223, 210, 72);
 }
 
 .grid div.square-full.rhode-island-z {
-  background-color: royalblue;
+  background-color: rgb(232, 161, 70);
 }
 
 .grid div.square-full.hero {
-  background-color: lawngreen
+  background-color: rgb(87, 189, 174);
 }
 
 .grid div.square-full.teewee {
-  background-color: yellow;
+  background-color: rgb(222, 224, 166);
 }
 
 .grid div.square-full.smashboy {
-  background-color: purple;
+  background-color: rgb(217, 177, 216);
 }
 
 
@@ -107,23 +122,23 @@ footer {
 /* RIGHT PANEL  */
 
 .right-panel {
-  background-color: beige;
+  /* background-color: rgb(232, 161, 70); */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
 .score-wrapper {
-  background-color: whitesmoke;
+  /* background-color: rgb(87, 189, 174); */
   flex-grow: 1;
 }
 
 .up-next-wrapper {
-  background-color: palegoldenrod;
+  /* background-color: rgb(217, 177, 216); */
   flex-grow: 1;
 }
 
 .level-wrapper {
-  background-color: paleturquoise;
+  /* background-color: rgb(223, 210, 72); */
   flex-grow: 1;
 }
