@@ -25,7 +25,7 @@ footer {
 }
 
 body {
-  background: linear-gradient(rgb(232, 161, 70), rgb(25, 44, 56));
+  background: rgb(25, 44, 56);
 }
 
 /* LEFT PANEL  */
@@ -132,16 +132,19 @@ body {
 }
 
 .score-wrapper {
-  /* background-color: rgb(87, 189, 174); */
+  /* background-color: rgb(248, 238, 225); */
   flex-grow: 1;
+  text-align: center;
 }
 
 .up-next-wrapper {
-  /* background-color: rgb(217, 177, 216); */
+  /* background-color: rgb(248, 238, 225); */
   flex-grow: 1;
+  text-align: center;
 }
 
 .level-wrapper {
-  /* background-color: rgb(223, 210, 72); */
+  /* background-color: rgb(248, 238, 225); */
   flex-grow: 1;
+  text-align: center;
 }

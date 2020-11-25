@@ -6,6 +6,11 @@ function init() {
 
   const startGameButton = document.querySelector('.start-button')
   const resetGameButton = document.querySelector('.reset-button')
+  const scoreDisplay = document.querySelector('.score-display')
+  const levelDisplay = document.querySelector('.level-display')
+
+  console.log(scoreDisplay)
+  console.log(levelDisplay)
 
   const width = 10
   const height = 20
@@ -22,6 +27,8 @@ function init() {
   const levelArray = [1]
   let totalScore = 0
 
+  scoreDisplay.textContent = totalScore
+  levelDisplay.textContent = levelTotal
 
   //* Tetrimonoes:
 
@@ -106,6 +113,14 @@ function init() {
 
     gameInPlay = false
     controlsEnabled = false
+
+    totalScore = 0
+    scoreDisplay.textContent = totalScore
+
+    levelTotal = 1
+    levelDisplay.textContent = levelTotal
+
+
     console.log(gameInPlay)
 
   }
@@ -190,7 +205,8 @@ function init() {
 
       totalScore = totalScore + (100 * levelTotal)
       console.log('TOTAL SCORE = ' + totalScore)
-
+      scoreDisplay.textContent = totalScore
+      levelDisplay.textContent = levelTotal
     }
   }
 
@@ -375,50 +391,63 @@ function init() {
   //* Move LEFT active Tetrimono
   function moveLeftActiveTetrimono() {
 
+    if (gameInPlay === true) {
 
+      if (checkingForFullSquares(-1, -1, -1, -1)) {
 
-    if (checkingForFullSquares(-1, -1, -1, -1)) {
+        //* If it passes the above checks,  it then checks any of the cells are at the edge of the grid
+        if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
+          return
+        } else if (cells[activeTetrimono.cellBPosition].classList.contains('X1')) {
+          return
+        } else if (cells[activeTetrimono.cellCPosition].classList.contains('X1')) {
+          return
+        } else if (cells[activeTetrimono.cellDPosition].classList.contains('X1')) {
+          return
+        } else {
+          removeActiveTetrimono()
+          moveCells(-1, -1, -1, -1)
+          fillSquares(0)
+        }
 
-      //* If it passes the above checks,  it then checks any of the cells are at the edge of the grid
-      if (cells[activeTetrimono.cellAPosition].classList.contains('X1')) {
-        return
-      } else if (cells[activeTetrimono.cellBPosition].classList.contains('X1')) {
-        return
-      } else if (cells[activeTetrimono.cellCPosition].classList.contains('X1')) {
-        return
-      } else if (cells[activeTetrimono.cellDPosition].classList.contains('X1')) {
-        return
       } else {
-        removeActiveTetrimono()
-        moveCells(-1, -1, -1, -1)
-        fillSquares(0)
+        return
       }
+
     } else {
-      return
+      console.log('Cannot MOVELEFT, game not in play!')
     }
+
   }
 
   //* Move RIGHT active Tetrimono
 
   function moveRightActiveTetrimono() {
 
-    if (checkingForFullSquares(1, 1, 1, 1)) {
-      if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
-        return
-      } else if (cells[activeTetrimono.cellBPosition].classList.contains('X10')) {
-        return
-      } else if (cells[activeTetrimono.cellCPosition].classList.contains('X10')) {
-        return
-      } else if (cells[activeTetrimono.cellDPosition].classList.contains('X10')) {
-        return
+    if (gameInPlay === true) {
+
+      if (checkingForFullSquares(1, 1, 1, 1)) {
+        if (cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+          return
+        } else if (cells[activeTetrimono.cellBPosition].classList.contains('X10')) {
+          return
+        } else if (cells[activeTetrimono.cellCPosition].classList.contains('X10')) {
+          return
+        } else if (cells[activeTetrimono.cellDPosition].classList.contains('X10')) {
+          return
+        } else {
+          removeActiveTetrimono()
+          moveCells(1, 1, 1, 1)
+          fillSquares(0)
+        }
       } else {
-        removeActiveTetrimono()
-        moveCells(1, 1, 1, 1)
-        fillSquares(0)
+        return
       }
+
     } else {
       return
     }
+
   }
 
 
@@ -604,30 +633,38 @@ function init() {
 
   function rotateActiveTetrimono() {
 
-    if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9) {
-      return
-    } else {
-      if (activeTetrimonoShape.name === 'Orange Ricky') {
-        rotateOrangeRicky()
-      }
-      if (activeTetrimonoShape.name === 'Blue Ricky') {
-        rotateBlueRicky()
-      }
-      if (activeTetrimonoShape.name === 'Cleveland Z') {
-        rotateClevelandZ()
-      }
-      if (activeTetrimonoShape.name === 'Rhode Island Z') {
-        rotateRhodeIslandZ()
-      }
-      if (activeTetrimonoShape.name === 'Hero') {
-        rotateHero()
-      }
-      if (activeTetrimonoShape.name === 'Teewee') {
-        rotateTeewee()
-      } else {
+    if (gameInPlay === true) {
+
+      if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9) {
         return
+      } else {
+        if (activeTetrimonoShape.name === 'Orange Ricky') {
+          rotateOrangeRicky()
+        }
+        if (activeTetrimonoShape.name === 'Blue Ricky') {
+          rotateBlueRicky()
+        }
+        if (activeTetrimonoShape.name === 'Cleveland Z') {
+          rotateClevelandZ()
+        }
+        if (activeTetrimonoShape.name === 'Rhode Island Z') {
+          rotateRhodeIslandZ()
+        }
+        if (activeTetrimonoShape.name === 'Hero') {
+          rotateHero()
+        }
+        if (activeTetrimonoShape.name === 'Teewee') {
+          rotateTeewee()
+        } else {
+          return
+        }
       }
+
+    } else {
+      return
     }
+
+
   }
 
 
@@ -670,7 +707,6 @@ function init() {
 
   startGameButton.addEventListener('click', startGame)
   resetGameButton.addEventListener('click', resetGame)
-
 
 
   //* Tests for movement etc
