@@ -105,9 +105,9 @@ function init() {
   //* Make the UP NEXT grid:
 
   function createUpNextGrid() {
-    for (let i = 0; i <= 20; i++) {
+    for (let i = 0; i < 20; i++) {
       const upNextCell = document.createElement('div')
-      upNextCell.textContent = i
+      // upNextCell.textContent = i
       upNextGrid.appendChild(upNextCell)
       upNextCells.push(upNextCell)
     }
