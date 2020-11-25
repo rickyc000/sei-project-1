@@ -17,10 +17,9 @@ function init() {
 
   let timerId = null
 
-
+  let levelTotal = 1
+  let levelArray = [1]
  
-
-  
 
   //* Tetrimonoes:
 
@@ -169,6 +168,13 @@ function init() {
 
       rowNumbersToClear.pop()
       checkingForCompleteRows()
+
+      //* Level calculator through each new score:
+      
+      levelArray.push(1)
+      console.log(levelArray + ' level Array')
+      level = Math.ceil(levelArray.length / 5)
+      console.log(level + ' current level')
     }
   }
 
