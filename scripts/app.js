@@ -289,12 +289,8 @@ function init() {
 
     levelTotal = Math.ceil(levelArray.length / 4)
     console.log(400 - levelArray.length * 100)
-    // clearInterval(timerId)
     controlsEnabled = false
-
     console.log(timerId + 'timer Id')
-
-
 
     if (gameInPlay === true) {
 
@@ -319,12 +315,6 @@ function init() {
       controlsEnabled = true
 
       gameOverCheck()
-
-      // timerId = setInterval(() => {
-      //   moveDownActiveTetrimono()
-      //   console.log(timerId + ' timerId')
-      // }, 400 - (levelTotal * 15))
-
       generateUpNextTetrimono()
       addUpNextTetrimono()
 
@@ -419,7 +409,6 @@ function init() {
         addActiveTetrimono()
 
       } else {
-
         if (checkingForFullSquares(10, 10, 10, 10)) {
           removeActiveTetrimono()
           moveCells(10, 10, 10, 10)
@@ -429,8 +418,6 @@ function init() {
           addActiveTetrimono()
         }
       }
-
-
 
     } else {
       console.log('Game not in play')
@@ -446,29 +433,32 @@ function init() {
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellDPosition]
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellAPosition]
     ) {
-      return
+      // return
+      console.log('cell A square full')
     } else if (cells[activeTetrimono.cellBPosition + cellB].classList.contains('square-full')
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellCPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellDPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellBPosition]
     ) {
-      // return false
-      return
+      // return
+      console.log('cell B square full')
     } else if (cells[activeTetrimono.cellCPosition + cellC].classList.contains('square-full')
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellDPosition]
-      && cells[activeTetrimono.cellBPosition + cellC] !== cells[activeTetrimono.cellCPosition]
+      && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellCPosition]
     ) {
-      return
+      // return
+      console.log('cell C square full')
     } else if (cells[activeTetrimono.cellDPosition + cellD].classList.contains('square-full')
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellCPosition]
-      && cells[activeTetrimono.cellBPosition + cellD] !== cells[activeTetrimono.cellDPosition]
+      && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellDPosition]
     ) {
-      return
+      // return
+      console.log('cell D square full')
     } else {
       return true
     }
