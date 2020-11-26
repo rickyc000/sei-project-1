@@ -33,6 +33,10 @@ function init() {
   scoreDisplay.textContent = totalScore
   levelDisplay.textContent = levelTotal
 
+  const musicAudio = document.querySelector('#music')
+
+  console.log(musicAudio)
+
   //* Tetrimonoes:
 
   const tetrimonoes = [
@@ -127,6 +131,7 @@ function init() {
     addUpNextTetrimono()
     addActiveTetrimono()
     startTimer()
+    handlePlayMusic()
   }
 
 
@@ -149,7 +154,7 @@ function init() {
 
     removeCellClasses()
     removeUpNextCellClasses()
-    console.log(gameInPlay)
+    handleStopMusic()
   }
 
 
@@ -773,8 +778,16 @@ function init() {
     }
   }
 
+  function handlePlayMusic() {
+    // musicAudio.src = './assets/ccl-tachyon-frog.wav'
+    musicAudio.play()
+  }
 
-
+  function handleStopMusic() {
+    // musicAudio.src = './assets/ccl-tachyon-frog.wav'
+    musicAudio.pause()
+    musicAudio.currentTime = 0
+  }
 
 
 

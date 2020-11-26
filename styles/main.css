@@ -194,6 +194,12 @@ body {
 
 .level-display {
   font-size: 100px;
+  text-shadow: rgb(217, 177, 216) 3px 3px;
+}
+
+.score-wrapper div, .level-wrapper div, .up-next-wrapper div {
+  text-shadow: rgb(217, 177, 216) 3px 2px;
+  letter-spacing: 0.1em;
 }
 
 /* UP NEXT */
