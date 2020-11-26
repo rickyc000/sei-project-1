@@ -257,7 +257,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 10px;
+  margin: 30px 0px;
   /* background-color: salmon; */
 }
 
@@ -269,8 +269,8 @@ body {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  width: 200px;
-  height: 160px;
+  width: 150px;
+  height: 120px;
 }
 
 .up-next-grid div {

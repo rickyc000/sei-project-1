@@ -5,8 +5,6 @@ function init() {
   const grid = document.querySelector('.grid')
   const upNextGrid = document.querySelector('.up-next-grid')
 
-  console.log(upNextGrid)
-
   const startGameButton = document.querySelector('.start-button')
   const resetGameButton = document.querySelector('.reset-button')
   const scoreDisplay = document.querySelector('.score-display')
@@ -22,7 +20,6 @@ function init() {
   let controlsEnabled = false
 
   let gameInPlay = false
-
 
   let timerId = null
 
@@ -40,9 +37,6 @@ function init() {
   const musicOnOffSection = document.querySelector('.music-on-off-section')
 
   muteIcon.style.display = 'none'
-
-
-  console.log(musicOnOffSection)
 
   //* Tetrimonoes:
 
@@ -139,13 +133,12 @@ function init() {
     addActiveTetrimono()
     startTimer()
     handlePlayMusic()
+    startGameButton.style.display = 'none'
   }
 
 
   //* Function to reset the game:
   function resetGame() {
-    console.log(gameInPlay)
-    console.log('reset game')
     clearInterval(timerId)
 
     gameInPlay = false
@@ -162,6 +155,7 @@ function init() {
     removeCellClasses()
     removeUpNextCellClasses()
     handleStopMusic()
+    startGameButton.style.display = 'flex'
   }
 
 
@@ -199,7 +193,6 @@ function init() {
 
   function generateUpNextTetrimono() {
     upNextTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
-    console.log(upNextTetrimonoShape.name + ' has been generated.')
     // activeTetrimonoShape = tetrimonoes[1]
   }
 
@@ -231,7 +224,6 @@ function init() {
           // console.log(rowNumber)
         }
         if (rows[rowNumber].length === 10) {
-          console.log('Row number ' + rowNumber + ' is full')
           completeRows.push(rowNumber)
         } else {
           // console.log(rowNumber)
@@ -277,21 +269,17 @@ function init() {
       checkingForCompleteRows()
 
       //* Level calculator through each new score:
-
       levelArray.push(1)
       levelTotal = Math.ceil(levelArray.length / 4)
-      console.log('The current level is: ' + levelTotal)
 
       //* Score calculator:
 
       totalScore = totalScore + (100 * levelTotal)
-      console.log('TOTAL SCORE = ' + totalScore)
       scoreDisplay.textContent = totalScore
       levelDisplay.textContent = levelTotal
       clearInterval(timerId)
-      console.log(timerId + ' timer Id being cleared')
       startTimer()
-      console.log(timerId + ' timer Id being created')
+
     }
   }
 
@@ -300,9 +288,7 @@ function init() {
   function addActiveTetrimono() {
 
     levelTotal = Math.ceil(levelArray.length / 4)
-    console.log(400 - levelArray.length * 100)
     controlsEnabled = false
-    console.log(timerId + 'timer Id')
 
     if (gameInPlay === true) {
 
@@ -342,16 +328,10 @@ function init() {
 
   //* Timer
   function startTimer() {
-
     timerId = setInterval(() => {
-      // const interval = 400 - levelTotal * 10
       interval = 400 - levelTotal * 30
-      console.log(interval + 'interval')
       moveDownActiveTetrimono()
-      console.log(timerId + ' timerId moving Tetrimono down')
     }, interval)
-    console.log(levelTotal * 10 + ' level total')
-
   }
 
 
@@ -434,7 +414,7 @@ function init() {
       }
 
     } else {
-      console.log('Game not in play')
+      return 
     }
   }
 
@@ -447,32 +427,28 @@ function init() {
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellDPosition]
       && cells[activeTetrimono.cellAPosition + cellA] !== cells[activeTetrimono.cellAPosition]
     ) {
-      // return
-      console.log('cell A square full')
+      return
     } else if (cells[activeTetrimono.cellBPosition + cellB].classList.contains('square-full')
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellCPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellDPosition]
       && cells[activeTetrimono.cellBPosition + cellB] !== cells[activeTetrimono.cellBPosition]
     ) {
-      // return
-      console.log('cell B square full')
+      return
     } else if (cells[activeTetrimono.cellCPosition + cellC].classList.contains('square-full')
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellDPosition]
       && cells[activeTetrimono.cellCPosition + cellC] !== cells[activeTetrimono.cellCPosition]
     ) {
-      // return
-      console.log('cell C square full')
+      return
     } else if (cells[activeTetrimono.cellDPosition + cellD].classList.contains('square-full')
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellAPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellBPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellCPosition]
       && cells[activeTetrimono.cellDPosition + cellD] !== cells[activeTetrimono.cellDPosition]
     ) {
-      // return
-      console.log('cell D square full')
+      return
     } else {
       return true
     }
