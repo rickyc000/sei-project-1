@@ -126,6 +126,7 @@ function init() {
     generateUpNextTetrimono()
     addUpNextTetrimono()
     addActiveTetrimono()
+    startTimer()
   }
 
 
@@ -275,6 +276,10 @@ function init() {
       console.log('TOTAL SCORE = ' + totalScore)
       scoreDisplay.textContent = totalScore
       levelDisplay.textContent = levelTotal
+      clearInterval(timerId)
+      console.log(timerId + ' timer Id being cleared')
+      startTimer()
+      console.log(timerId + ' timer Id being created')
     }
   }
 
@@ -283,12 +288,11 @@ function init() {
   function addActiveTetrimono() {
 
     levelTotal = Math.ceil(levelArray.length / 4)
-    console.log(levelArray)
     console.log(400 - levelArray.length * 100)
-    clearInterval(timerId)
+    // clearInterval(timerId)
     controlsEnabled = false
 
-    console.log(timerId)
+    console.log(timerId + 'timer Id')
 
 
 
@@ -316,10 +320,10 @@ function init() {
 
       gameOverCheck()
 
-      timerId = setInterval(() => {
-        moveDownActiveTetrimono()
-        console.log(timerId + ' timerId')
-      }, 400 - (levelTotal * 15))
+      // timerId = setInterval(() => {
+      //   moveDownActiveTetrimono()
+      //   console.log(timerId + ' timerId')
+      // }, 400 - (levelTotal * 15))
 
       generateUpNextTetrimono()
       addUpNextTetrimono()
@@ -331,8 +335,20 @@ function init() {
     }
   }
 
+  let interval = 400 - levelTotal * 30
+  //* Timer
+  function startTimer() {
 
+    timerId = setInterval(() => {
+      // const interval = 400 - levelTotal * 10
+      interval = 400 - levelTotal * 30
+      console.log(interval + 'interval')
+      moveDownActiveTetrimono()
+      console.log(timerId + ' timerId moving Tetrimono down')
+    }, interval)
+    console.log(levelTotal * 10 + ' level total')
 
+  }
 
 
   //* Checking for GAME OVER:
