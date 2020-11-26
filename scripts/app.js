@@ -1,5 +1,5 @@
 function init() {
-  console.log('js is running')
+  console.log('Javascript is running')
 
   // * Variables
   const grid = document.querySelector('.grid')
@@ -35,8 +35,14 @@ function init() {
   const speakerIcon = document.querySelector('#speaker-icon')
   const muteIcon = document.querySelector('#mute-icon')
   const musicOnOffSection = document.querySelector('.music-on-off-section')
+  const playAgainButton = document.querySelector('.play-again')
+  const gameOverWrapper = document.querySelector('.game-over-wrapper')
 
   muteIcon.style.display = 'none'
+  gameOverWrapper.style.display = 'none'
+  console.log(gameOverWrapper)
+
+
 
   //* Tetrimonoes:
 
@@ -344,11 +350,10 @@ function init() {
     } else {
 
       gameInPlay = false
-      console.log(timerId)
       clearInterval(timerId)
       clearInterval(timerId + 1)
-      console.log('GAME OVER!')
-      //* Deactivate the timer and add a pop out message here with the option to restart (refresh the page)
+
+      gameOverWrapper.style.display = 'flex'
     }
 
   }
@@ -791,22 +796,22 @@ function init() {
     }
   }
 
+  function playAgain() {
+    gameOverWrapper.style.display = 'none'
+    resetGame()
+    startGame()
+  }
 
 
   //* Event listeners
 
   document.addEventListener('keydown', handleKeyDown)
-
   startGameButton.addEventListener('click', startGame)
   resetGameButton.addEventListener('click', resetGame)
   musicOnOffSection.addEventListener('click', musicToggle)
+  playAgainButton.addEventListener('click', playAgain)
 
 
-  //* Tests for movement etc
-
-  // setTimeout(() => {
-  //   moveDownActiveTetrimono()
-  // }, 1000)
 
 }
 
