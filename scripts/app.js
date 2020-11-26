@@ -27,7 +27,7 @@ function init() {
   let timerId = null
 
   let levelTotal = 1
-  const levelArray = [1]
+  let levelArray = [1]
   let totalScore = 0
 
   scoreDisplay.textContent = totalScore
@@ -143,6 +143,8 @@ function init() {
 
     levelTotal = 1
     levelDisplay.textContent = levelTotal
+
+    levelArray = [1]
 
     removeCellClasses()
     removeUpNextCellClasses()
@@ -264,7 +266,7 @@ function init() {
       //* Level calculator through each new score:
 
       levelArray.push(1)
-      levelTotal = Math.ceil(levelArray.length / 5)
+      levelTotal = Math.ceil(levelArray.length / 4)
       console.log('The current level is: ' + levelTotal)
 
       //* Score calculator:
@@ -280,10 +282,15 @@ function init() {
   //* Add a new shape to the top of the page
   function addActiveTetrimono() {
 
+    levelTotal = Math.ceil(levelArray.length / 4)
+    console.log(levelArray)
+    console.log(400 - levelArray.length * 100)
     clearInterval(timerId)
     controlsEnabled = false
 
     console.log(timerId)
+
+
 
     if (gameInPlay === true) {
 
@@ -312,7 +319,7 @@ function init() {
       timerId = setInterval(() => {
         moveDownActiveTetrimono()
         console.log(timerId + ' timerId')
-      }, 400 - (levelTotal * 10))
+      }, 400 - (levelTotal * 15))
 
       generateUpNextTetrimono()
       addUpNextTetrimono()
