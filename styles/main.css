@@ -1,11 +1,10 @@
 * {
   box-sizing: border-box;
-  font-family: 'Space Grotesk', sans-serif;
-  color: rgb(87, 189, 174);
+  /* color: rgb(87, 189, 174); */
   text-transform: uppercase;
-  font-style: italic;
+  
   font-size: 40px;
-  cursor: default;
+  /* cursor: default; */
 }
 
 main {
@@ -27,6 +26,10 @@ footer {
 
 body {
   background: rgb(25, 44, 56);
+  font-family: 'Space Grotesk', sans-serif;
+  color: rgb(87, 189, 174);
+  font-style: italic;
+  cursor: default;
 }
 
 /* LEFT PANEL  */
@@ -36,6 +39,7 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: space-around;
   min-width: 400px;
 }
@@ -48,8 +52,6 @@ body {
   /* text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white; */
   text-shadow: rgb(217, 177, 216) 3px 3px;
   /* background-image: linear-gradient(45deg, #f3ec78, #af4261); */
-
-
 }
 
 .tetris {
@@ -77,6 +79,29 @@ body {
   border: 7px solid rgb(226, 84, 57);
   margin: 40px;
 }
+
+.music-on-off-section {
+  display: flex;
+  width: 250px;
+  justify-content: space-evenly;
+  /* background-color: white; */
+}
+
+.music-on-off-section div {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.music-on-off-section div {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.music-on-off-section {
+  cursor: pointer;
+}
+
+
 
 
 /* GRID SECTION */
@@ -172,6 +197,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  align-items: center;
 }
 
 .score-wrapper {
@@ -235,38 +261,3 @@ body {
   
   /* padding: 2px; */
 }
-
-/* UP NEXT GRID */
-
-/* .up-next-grid div.square-full {
-  background-color: lightcoral;
-  border: 2px solid lightblue;
-}
-
-.up-next-grid div.square-full.orange-ricky {
-  background-color: rgb(226, 84, 57);
-}
-
-.up-next-grid div.square-full.blue-ricky {
-  background-color: rgb(195, 88, 229);
-}
-
-.up-next-grid div.square-full.cleveland-z {
-  background-color: rgb(223, 210, 72);
-}
-
-.up-next-grid div.square-full.rhode-island-z {
-  background-color: rgb(232, 161, 70);
-}
-
-.up-next-grid div.square-full.hero {
-  background-color: rgb(87, 189, 174);
-}
-
-.up-next-grid div.square-full.teewee {
-  background-color: rgb(222, 224, 166);
-}
-
-.up-next-grid div.square-full.smashboy {
-  background-color: rgb(217, 177, 216);
-} */

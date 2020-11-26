@@ -34,8 +34,15 @@ function init() {
   levelDisplay.textContent = levelTotal
 
   const musicAudio = document.querySelector('#music')
+  const musicOnOff = document.querySelector('#music-on-off')
+  const speakerIcon = document.querySelector('#speaker-icon')
+  const muteIcon = document.querySelector('#mute-icon')
+  const musicOnOffSection = document.querySelector('.music-on-off-section')
 
-  console.log(musicAudio)
+  muteIcon.style.display = 'none'
+
+
+  console.log(musicOnOffSection)
 
   //* Tetrimonoes:
 
@@ -778,18 +785,33 @@ function init() {
     }
   }
 
+  let musicIsPlaying = false
+
   function handlePlayMusic() {
-    // musicAudio.src = './assets/ccl-tachyon-frog.wav'
     musicAudio.play()
+    musicOnOff.textContent = 'Music On'
+    speakerIcon.style.display = 'block'
+    muteIcon.style.display = 'none'
+    musicIsPlaying = true
   }
 
   function handleStopMusic() {
-    // musicAudio.src = './assets/ccl-tachyon-frog.wav'
     musicAudio.pause()
     musicAudio.currentTime = 0
+    musicOnOff.textContent = 'Music Off'
+    speakerIcon.style.display = 'none'
+    muteIcon.style.display = 'block'
+    musicIsPlaying = false
   }
 
-
+  function musicToggle() {
+    console.log('music toggle')
+    if (musicIsPlaying) {
+      handleStopMusic()
+    } else {
+      handlePlayMusic()
+    }
+  }
 
 
   //* Event listeners
@@ -798,6 +820,7 @@ function init() {
 
   startGameButton.addEventListener('click', startGame)
   resetGameButton.addEventListener('click', resetGame)
+  musicOnOffSection.addEventListener('click', musicToggle)
 
 
   //* Tests for movement etc

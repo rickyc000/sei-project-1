@@ -4,11 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <script src="https://use.fontawesome.com/088925bb52.js"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.js" integrity="sha256-2JRzNxMJiS0aHOJjG+liqsEOuBb6++9cY4dSOyiijX4=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="styles/main.css">
   <script src="scripts/app.js" charset="utf-8"></script>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
-<link rel="shortcut icon" href="assets/tetris-game-favicon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+  <link rel="shortcut icon" href="assets/tetris-game-favicon.png">
   <title>TETRIS</title>
 </head>
 
@@ -33,9 +35,15 @@
         </div>
       </section>
 
-      <section class="audio">
-        <div class="audio-on-off">
+      <section class="music-on-off-section">
+        <div id="music-on-off">
           Music On
+        </div>
+        <div id="speaker-icon">
+          <i class="fas fa-volume-up"></i>
+        </div>
+        <div id="mute-icon">
+          <i class="fas fa-volume-mute"></i>
         </div>
       </section>
 
@@ -48,11 +56,11 @@
 
     <section class="right-panel">
 
-      <section class ="score-wrapper">
+      <section class="score-wrapper">
         <div>Score</div>
         <div class="score-display"></div>
       </section>
-    
+
       <section class="up-next-wrapper">
         <div>Up Next </div>
         <div class="up-next-grid">
@@ -73,7 +81,7 @@
 
   </footer>
 
-  <audio id="music" src = './assets/ccl-tachyon-frog.wav'></audio>
+  <audio id="music" src='./assets/ccl-tachyon-frog.wav'></audio>
 </body>
 
 </html>
