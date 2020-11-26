@@ -338,6 +338,8 @@ function init() {
   }
 
   let interval = 400 - levelTotal * 30
+
+
   //* Timer
   function startTimer() {
 
@@ -805,13 +807,14 @@ function init() {
   }
 
   function musicToggle() {
-    console.log('music toggle')
+    console.log(levelTotal)
     if (musicIsPlaying) {
       handleStopMusic()
     } else {
       handlePlayMusic()
     }
   }
+
 
 
   //* Event listeners
