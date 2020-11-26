@@ -5,12 +5,13 @@
   text-transform: uppercase;
   font-style: italic;
   font-size: 40px;
+  cursor: default;
 }
 
 main {
   display: flex;
-  justify-content: space-around;
-  /* background: linear-gradient(rgb(232, 161, 70),  rgb(25, 44, 56)); */
+  justify-content: center;
+  /* background: linear-gradient( rgb(25, 44, 56), rgb(87, 189, 174)); */
 }
 
 header {
@@ -20,7 +21,7 @@ header {
 
 
 footer {
-  /* background-color: rgb(25, 44, 56); */
+  /* background-color: rgb(232, 161, 70); */
   height: 50px;
 }
 
@@ -29,13 +30,24 @@ body {
 }
 
 /* LEFT PANEL  */
-/* rgb(232, 161, 70); */
 
 .left-panel {
   /* background: linear-gradient(rgb(232, 161, 70),  rgb(25, 44, 56)); */
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  min-width: 400px;
+}
+
+.tetris div {
+  /* display: flex;
+  justify-self: start; */
+  font-size: 120px;
+}
+
+.tetris {
+  display: flex;
   justify-content: center;
 }
 
@@ -43,17 +55,21 @@ body {
   /* background-color: mistyrose; */
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+  align-items: center;
   height: 500px;
 }
 
 .start-button, .reset-button {
   /* background-color: lightblue; */
+  display: flex;
   height: 100px;
   width: 300px;
   padding: 20px;
   cursor: pointer;
   background-color: rgb(248, 238, 225);
+  border: 7px solid rgb(226, 84, 57);
+  margin: 40px;
 }
 
 
@@ -63,7 +79,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid rgb(232, 161, 70);
+  border: 5px solid rgb(232, 161, 70);
   /* background-color: salmon; */
 }
 
@@ -74,55 +90,66 @@ body {
 .grid {
   /* align-items: center; */
   /* box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2); */
-  background:  rgb(25, 44, 56);
+  /* background:  rgb(25, 44, 56); */
   display: flex;
   flex-wrap: wrap;
   /* height: 200%; */
   justify-content: center;
   height: 800px;
   width: 400px;
+  padding: 10px;
+  /* gap: .5px; */
 }
 
 
 
 .grid div {
-  border: 1px solid rgb(232, 161, 70);
+  border: 1px solid rgb(87, 189, 174);
   /* background-color: rgb(248, 238, 225); */
   /* flex-grow: .5; */
   height: 5%;
   width: 10%;
-  padding: 2px;
+  padding: 1px;
 }
 
-.grid div.square-full {
+.grid div.square-full,
+.up-next-grid div.square-full {
   background-color: lightcoral;
+  border: 2px solid lightblue;
 }
 
-.grid div.square-full.orange-ricky {
+.grid div.square-full.orange-ricky,
+.up-next-grid div.square-full.orange-ricky {
   background-color: rgb(226, 84, 57);
 }
 
-.grid div.square-full.blue-ricky {
+.grid div.square-full.blue-ricky,
+.up-next-grid div.square-full.blue-ricky {
   background-color: rgb(195, 88, 229);
 }
 
-.grid div.square-full.cleveland-z {
+.grid div.square-full.cleveland-z,
+.up-next-grid div.square-full.cleveland-z {
   background-color: rgb(223, 210, 72);
 }
 
-.grid div.square-full.rhode-island-z {
+.grid div.square-full.rhode-island-z,
+.up-next-grid div.square-full.rhode-island-z, {
   background-color: rgb(232, 161, 70);
 }
 
-.grid div.square-full.hero {
+.grid div.square-full.hero,
+.up-next-grid div.square-full.hero {
   background-color: rgb(87, 189, 174);
 }
 
-.grid div.square-full.teewee {
+.grid div.square-full.teewee,
+.up-next-grid div.square-full.teewee {
   background-color: rgb(222, 224, 166);
 }
 
-.grid div.square-full.smashboy {
+.grid div.square-full.smashboy,
+.up-next-grid div.square-full.smashboy {
   background-color: rgb(217, 177, 216);
 }
 
@@ -138,25 +165,35 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
 }
 
 .score-wrapper {
   /* background-color: rgb(248, 238, 225); */
-  flex-grow: 1;
+  /* flex-grow: 1; */
   text-align: center;
+  
+}
+
+.score-display {
+  font-size: 100px ; 
 }
 
 
 .level-wrapper {
   /* background-color: rgb(248, 238, 225); */
-  flex-grow: 1;
+  /* flex-grow: 1; */
   text-align: center;
+}
+
+.level-display {
+  font-size: 100px;
 }
 
 /* UP NEXT */
 
 .up-next-wrapper {
-  flex-grow: 1;
+  /* flex-grow: 1; */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -179,7 +216,7 @@ body {
 .up-next-grid div {
   /* border: 1px solid rgb(232, 161, 70); */
   /* background-color: rgb(248, 238, 225); */
-  /* flex-grow: .5; */
+  /* flex-grow: 1; */
   width: 20%;
   height: 25%;
   font-size: small;
@@ -189,8 +226,9 @@ body {
 
 /* UP NEXT GRID */
 
-.up-next-grid div.square-full {
+/* .up-next-grid div.square-full {
   background-color: lightcoral;
+  border: 2px solid lightblue;
 }
 
 .up-next-grid div.square-full.orange-ricky {
@@ -219,4 +257,4 @@ body {
 
 .up-next-grid div.square-full.smashboy {
   background-color: rgb(217, 177, 216);
-}
+} */

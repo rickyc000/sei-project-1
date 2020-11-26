@@ -133,6 +133,7 @@ function init() {
   function resetGame() {
     console.log(gameInPlay)
     console.log('reset game')
+    clearInterval(timerId)
 
     gameInPlay = false
     controlsEnabled = false
@@ -192,7 +193,6 @@ function init() {
   function addUpNextTetrimono() {
     removeUpNextCellClasses()
     const upNextPosition = upNextTetrimonoShape.upNextPosition
-    console.log(upNextPosition)
     upNextCells[upNextPosition[0]].classList.add('square-full', upNextTetrimonoShape.color)
     upNextCells[upNextPosition[1]].classList.add('square-full', upNextTetrimonoShape.color)
     upNextCells[upNextPosition[2]].classList.add('square-full', upNextTetrimonoShape.color)
@@ -278,22 +278,18 @@ function init() {
 
 
   //* Add a new shape to the top of the page
-
   function addActiveTetrimono() {
 
     clearInterval(timerId)
     controlsEnabled = false
 
-    // checkingForCompleteRows()
+    console.log(timerId)
 
     if (gameInPlay === true) {
 
       checkingForCompleteRows()
 
-
-
       activeTetrimonoShape = upNextTetrimonoShape
-
       const startingTetrimono = upNextTetrimonoShape
       const startingPosition = startingTetrimono.defaultPosition
 
@@ -313,23 +309,18 @@ function init() {
 
       gameOverCheck()
 
-      // generateUpNextTetrimono()
-      // addUpNextTetrimono()
-
-
       timerId = setInterval(() => {
         moveDownActiveTetrimono()
         console.log(timerId + ' timerId')
-      }, 400)
+      }, 400 - (levelTotal * 10))
 
       generateUpNextTetrimono()
       addUpNextTetrimono()
 
-
-
-
     } else {
       console.log('game not in play')
+      console.log('here', timerId)
+      clearInterval(timerId)
     }
   }
 
@@ -346,6 +337,9 @@ function init() {
     } else {
 
       gameInPlay = false
+      console.log(timerId)
+      clearInterval(timerId)
+      clearInterval(timerId + 1)
       console.log('GAME OVER!')
       //* Deactivate the timer and add a pop out message here with the option to restart (refresh the page)
     }
