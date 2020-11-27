@@ -40,8 +40,6 @@ function init() {
 
   muteIcon.style.display = 'none'
   gameOverWrapper.style.display = 'none'
-  console.log(gameOverWrapper)
-
 
 
   //* Tetrimonoes:
@@ -200,7 +198,7 @@ function init() {
     upNextTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
     // activeTetrimonoShape = tetrimonoes[1]
   }
-  
+
 
   //* Add the up next Tetrimono:
   function addUpNextTetrimono() {
@@ -620,26 +618,36 @@ function init() {
 
   function rotateHero() {
 
-    if (activeTetrimono.orientation === 'default') {
-      checkAndRotateTetrimono(-19, -10, -1, 8, 'left-side')
-
-    } else if (activeTetrimono.orientation === 'left-side') {
-      if (cells[activeTetrimono.cellAPosition].classList.contains('X1') || cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
-        return
-      } else {
-        checkAndRotateTetrimono(12, 1, -10, -21, 'upside-down')
-      }
-
-    } else if (activeTetrimono.orientation === 'upside-down') {
-      checkAndRotateTetrimono(19, 10, 1, -8, 'right-side')
-
+    if (activeTetrimono.cellAPosition >= 10 && activeTetrimono.cellAPosition <= 19 ||
+      activeTetrimono.cellBPosition >= 10 && activeTetrimono.cellBPosition <= 19 ||
+      activeTetrimono.cellCPosition >= 10 && activeTetrimono.cellCPosition <= 19 ||
+      activeTetrimono.cellDPosition >= 10 && activeTetrimono.cellDPosition <= 19) {
+      return
     } else {
-      if (cells[activeTetrimono.cellAPosition].classList.contains('X1') || cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
-        return
+
+      if (activeTetrimono.orientation === 'default') {
+        checkAndRotateTetrimono(-19, -10, -1, 8, 'left-side')
+
+      } else if (activeTetrimono.orientation === 'left-side') {
+        if (cells[activeTetrimono.cellAPosition].classList.contains('X1') || cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+          return
+        } else {
+          checkAndRotateTetrimono(12, 1, -10, -21, 'upside-down')
+        }
+
+      } else if (activeTetrimono.orientation === 'upside-down') {
+        checkAndRotateTetrimono(19, 10, 1, -8, 'right-side')
+
       } else {
-        checkAndRotateTetrimono(-12, -1, 10, 21, 'default')
+        if (cells[activeTetrimono.cellAPosition].classList.contains('X1') || cells[activeTetrimono.cellAPosition].classList.contains('X10')) {
+          return
+        } else {
+          checkAndRotateTetrimono(-12, -1, 10, 21, 'default')
+        }
       }
+
     }
+
   }
 
   //* ROTATION rules for TEEWEE shape
@@ -672,8 +680,10 @@ function init() {
   function rotateActiveTetrimono() {
 
     if (gameInPlay === true) {
-
-      if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9) {
+      if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9 ||
+        activeTetrimono.cellBPosition >= 0 && activeTetrimono.cellBPosition <= 9 ||
+        activeTetrimono.cellCPosition >= 0 && activeTetrimono.cellCPosition <= 9 ||
+        activeTetrimono.cellDPosition >= 0 && activeTetrimono.cellDPosition <= 9) {
         return
       } else {
         if (activeTetrimonoShape.name === 'Orange Ricky') {
@@ -749,7 +759,6 @@ function init() {
   }
 
   function musicToggle() {
-    console.log(levelTotal)
     if (musicIsPlaying) {
       handleStopMusic()
     } else {

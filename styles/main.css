@@ -65,7 +65,6 @@ body {
 }
 
 
-
 /* LEFT PANEL  */
 
 .left-panel {
@@ -82,6 +81,17 @@ body {
   font-size: 115px;
   padding: 0px 10px;
   text-shadow: rgb(217, 177, 216) 3px 3px;
+}
+
+.tetris div:hover {
+  color: rgb(217, 177, 216);
+  text-shadow: rgb(87, 189, 174) 3px 3px;
+}
+
+@keyframes shake {
+  0% {transform: translate(0px, 0px);}
+  50% {transform: translate(2px, 2px);}
+  100% {transform: translate(0px, 0px);}
 }
 
 .tetris {
@@ -107,10 +117,17 @@ body {
   cursor: pointer;
   background-color: rgb(248, 238, 225);
   border: 5px solid rgb(226, 84, 57);
-  margin: 30px;
+  margin: 35px;
   font-size: 26px;
 }
 
+.start-button:hover {
+  animation: shake .8s infinite;
+}
+
+.reset-button:hover {
+  animation: shake .8s infinite;
+}
 
 .music-on-off-section {
   display: flex;
@@ -128,8 +145,6 @@ body {
   font-size: 15px;
 }
 
-
-
 .controls-wrapper {
   display: flex;
   flex-direction: column;
@@ -143,7 +158,7 @@ body {
 .controls-wrapper div {
   font-size: 15px;
   text-align: center;
-  margin: 2px;
+  margin: 1px;
   color: rgb(25, 44, 56);
 }
 
@@ -154,8 +169,6 @@ body {
 }
 
 
-
-
 /* GRID SECTION */
 
 .grid-wrapper {
@@ -163,8 +176,6 @@ body {
   justify-content: center;
   align-items: center;
 }
-
-
 
 .grid {
   display: flex;
@@ -175,7 +186,6 @@ body {
   padding: 10px;
   border: 3px solid rgb(232, 161, 70);
 }
-
 
 
 .grid div {
@@ -228,9 +238,6 @@ body {
 
 
 
-
-
-
 /* RIGHT PANEL  */
 
 .right-panel {
@@ -254,7 +261,6 @@ body {
 }
 
 
-
 .level-display {
   font-size: 100px;
   text-shadow: rgb(217, 177, 216) 2px 2px;
@@ -270,6 +276,14 @@ body {
   font-size: 95px;
 }
 
+.score-wrapper div:hover, .level-wrapper div:hover, .up-next-wrapper div:hover {
+  color: rgb(222, 224, 166);
+  text-shadow: rgb(87, 189, 174) 2px 2px;
+}
+
+
+
+
 /* UP NEXT */
 
 .up-next-wrapper {
@@ -279,7 +293,6 @@ body {
   align-items: center;
   margin: 30px 0px;
 }
-
 
 .up-next-grid {
   background: rgb(25, 44, 56);
@@ -293,5 +306,5 @@ body {
 .up-next-grid div {
   width: 20%;
   height: 25%;
-  font-size: small;
+  /* font-size: small; */
 }
