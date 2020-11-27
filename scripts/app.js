@@ -41,6 +41,8 @@ function init() {
   muteIcon.style.display = 'none'
   gameOverWrapper.style.display = 'none'
 
+  const gridBox = document.querySelector('.grid')
+
 
   //* Tetrimonoes:
 
@@ -238,6 +240,15 @@ function init() {
   }
 
 
+  function flashGridBox() {
+    gridBox.classList.add('flash')
+
+    setTimeout(() => {
+      gridBox.classList.remove('flash')
+    }, 500)
+  }
+
+
 
   //* FUNCTION to clear a ROW when complete:
   function clearCompleteRows(rowNumbersToClear) {
@@ -279,6 +290,7 @@ function init() {
       clearInterval(timerId)
       startTimer()
 
+      flashGridBox()
     }
   }
 
@@ -313,6 +325,7 @@ function init() {
       gameOverCheck()
       generateUpNextTetrimono()
       addUpNextTetrimono()
+      
 
     } else {
       console.log('game not in play')
