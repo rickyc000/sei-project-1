@@ -196,12 +196,11 @@ function init() {
 
 
   //* Generate a random shape
-
   function generateUpNextTetrimono() {
     upNextTetrimonoShape = tetrimonoes[Math.floor(Math.random() * tetrimonoes.length)]
     // activeTetrimonoShape = tetrimonoes[1]
   }
-
+  
 
   //* Add the up next Tetrimono:
   function addUpNextTetrimono() {
@@ -216,7 +215,6 @@ function init() {
 
 
   //* LOOP to check for full rows of squares
-
   function checkingForCompleteRows() {
     const rows = []
     const completeRows = []
@@ -244,7 +242,6 @@ function init() {
 
 
   //* FUNCTION to clear a ROW when complete:
-
   function clearCompleteRows(rowNumbersToClear) {
 
     //* If the array is empty, then nothing happens
@@ -270,7 +267,6 @@ function init() {
 
       //* The function then clears the last row number from the array
       //* And runs the check for complete rows again:
-
       rowNumbersToClear.pop()
       checkingForCompleteRows()
 
@@ -279,7 +275,6 @@ function init() {
       levelTotal = Math.ceil(levelArray.length / 4)
 
       //* Score calculator:
-
       totalScore = totalScore + (100 * levelTotal)
       scoreDisplay.textContent = totalScore
       levelDisplay.textContent = levelTotal
@@ -317,7 +312,6 @@ function init() {
       activeTetrimono.color = startingTetrimono.color
 
       controlsEnabled = true
-
       gameOverCheck()
       generateUpNextTetrimono()
       addUpNextTetrimono()
@@ -329,10 +323,8 @@ function init() {
     }
   }
 
-  let interval = 400 - levelTotal * 30
-
-
   //* Timer
+  let interval = 400 - levelTotal * 30
   function startTimer() {
     timerId = setInterval(() => {
       interval = 400 - levelTotal * 30
@@ -352,10 +344,8 @@ function init() {
       gameInPlay = false
       clearInterval(timerId)
       clearInterval(timerId + 1)
-
       gameOverWrapper.style.display = 'flex'
     }
-
   }
 
 
@@ -389,7 +379,6 @@ function init() {
 
 
   //* MOVE DOWN function:
-
   function moveDownActiveTetrimono() {
 
     if (gameInPlay === true) {
@@ -397,29 +386,23 @@ function init() {
       //   //* Checks to see if the Active Cell is on the BOTTOM ROW:
       if (activeTetrimono.cellAPosition >= 190 && activeTetrimono.cellAPosition <= 199) {
         addActiveTetrimono()
-
       } else if (activeTetrimono.cellBPosition >= 190 && activeTetrimono.cellBPosition <= 199) {
         addActiveTetrimono()
-
       } else if (activeTetrimono.cellCPosition >= 190 && activeTetrimono.cellCPosition <= 199) {
         addActiveTetrimono()
-
       } else if (activeTetrimono.cellDPosition >= 190 && activeTetrimono.cellDPosition <= 199) {
         addActiveTetrimono()
-
       } else {
         if (checkingForFullSquares(10, 10, 10, 10)) {
           removeActiveTetrimono()
           moveCells(10, 10, 10, 10)
           fillSquares(0)
         } else {
-
           addActiveTetrimono()
         }
       }
-
     } else {
-      return 
+      return
     }
   }
 
@@ -460,11 +443,8 @@ function init() {
   }
 
 
-
-
   //* Move LEFT active Tetrimono
   function moveLeftActiveTetrimono() {
-
     if (gameInPlay === true) {
 
       if (checkingForFullSquares(-1, -1, -1, -1)) {
@@ -483,21 +463,17 @@ function init() {
           moveCells(-1, -1, -1, -1)
           fillSquares(0)
         }
-
       } else {
         return
       }
-
     } else {
       console.log('Cannot MOVELEFT, game not in play!')
     }
-
   }
 
+
   //* Move RIGHT active Tetrimono
-
   function moveRightActiveTetrimono() {
-
     if (gameInPlay === true) {
 
       if (checkingForFullSquares(1, 1, 1, 1)) {
@@ -525,8 +501,7 @@ function init() {
   }
 
 
-  //* Function to check for available spaces, MOVE if yes, RETURN nothing if no
-
+  //* Function to check for available spaces, MOVE if yes, RETURN nothing if no:
   function checkAndRotateTetrimono(cellA, cellB, cellC, cellD, orientation) {
     if (checkingForFullSquares(cellA, cellB, cellC, cellD)) {
       removeActiveTetrimono()
@@ -567,7 +542,6 @@ function init() {
 
 
   //* ROTATION rules for BLUE RICKY shape:
-
   function rotateBlueRicky() {
 
     if (activeTetrimono.orientation === 'default') {
@@ -593,7 +567,6 @@ function init() {
   }
 
   //* ROTATION rules for CLEVELAND Z shape:
-
   function rotateClevelandZ() {
     if (activeTetrimono.orientation === 'default') {
       checkAndRotateTetrimono(-9, 0, -11, -2, 'left-side')
@@ -619,7 +592,6 @@ function init() {
 
 
   //* ROTATION rules for Rhode Island Z:
-
   function rotateRhodeIslandZ() {
     if (activeTetrimono.orientation === 'default') {
       checkAndRotateTetrimono(0, 9, -20, -11, 'left-side')
@@ -644,14 +616,9 @@ function init() {
   }
 
 
-
   //* ROTATION rules for HERO
 
   function rotateHero() {
-
-    //! Can't add this here because it needs to be written into the rules of certain orientations:
-    // if (activeTetrimono.cellAPosition >= 0 && activeTetrimono.cellAPosition <= 9) {
-    //       return
 
     if (activeTetrimono.orientation === 'default') {
       checkAndRotateTetrimono(-19, -10, -1, 8, 'left-side')
@@ -701,9 +668,7 @@ function init() {
   }
 
 
-
   //* ROTATIONS for each of the different shapes:
-
   function rotateActiveTetrimono() {
 
     if (gameInPlay === true) {
@@ -732,17 +697,13 @@ function init() {
           return
         }
       }
-
     } else {
       return
     }
-
-
   }
 
 
-  //* Move a shape with the keyboard
-
+  //* Controls:
   function handleKeyDown(event) {
     switch (event.keyCode) {
       case 40:
@@ -802,16 +763,12 @@ function init() {
     startGame()
   }
 
-
   //* Event listeners
-
   document.addEventListener('keydown', handleKeyDown)
   startGameButton.addEventListener('click', startGame)
   resetGameButton.addEventListener('click', resetGame)
   musicOnOffSection.addEventListener('click', musicToggle)
   playAgainButton.addEventListener('click', playAgain)
-
-
 
 }
 
