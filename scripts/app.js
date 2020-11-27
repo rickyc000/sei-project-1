@@ -38,11 +38,11 @@ function init() {
   const playAgainButton = document.querySelector('.play-again')
   const gameOverWrapper = document.querySelector('.game-over-wrapper')
 
+  const gridBox = document.querySelector('.grid')
+  const clearRowSound = document.querySelector('#clear-row')
+
   muteIcon.style.display = 'none'
   gameOverWrapper.style.display = 'none'
-
-  const gridBox = document.querySelector('.grid')
-
 
   //* Tetrimonoes:
 
@@ -291,6 +291,7 @@ function init() {
       startTimer()
 
       flashGridBox()
+      handlePlayclearRowSound()
     }
   }
 
@@ -769,6 +770,10 @@ function init() {
     speakerIcon.style.display = 'none'
     muteIcon.style.display = 'block'
     musicIsPlaying = false
+  }
+  
+  function handlePlayclearRowSound() {
+    clearRowSound.play()
   }
 
   function musicToggle() {
