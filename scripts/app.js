@@ -225,12 +225,12 @@ function init() {
         if (cells[cellNumber].classList.contains('square-full')) {
           rows[rowNumber].push(['square-full'])
         } else {
-          return
+          console.log(rowNumber)
         }
         if (rows[rowNumber].length === 10) {
           completeRows.push(rowNumber)
         } else {
-          return
+          console.log(rowNumber)
         }
       }
     }
@@ -273,7 +273,7 @@ function init() {
           cells[i].classList = cells[i - 10].classList
         }
       }
-
+      console.log('checking')
       //* The function then clears the last row number from the array
       //* And runs the check for complete rows again:
       rowNumbersToClear.pop()

@@ -161,12 +161,3 @@ This function's role is to wipe all cells in each completed row of their `full` 
 
 
 
-## Notes / to finish
-
-Other readme examples have included some information about the project brief
-
-this was taken 3 weeks into the course
-
-this was a choice of various different games but was one of the hardest in terms of difficulty
-
-perhaps change goal to overview
