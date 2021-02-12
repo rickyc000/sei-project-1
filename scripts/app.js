@@ -225,17 +225,17 @@ function init() {
         if (cells[cellNumber].classList.contains('square-full')) {
           rows[rowNumber].push(['square-full'])
         } else {
-          // console.log(rowNumber)
+          return
         }
         if (rows[rowNumber].length === 10) {
           completeRows.push(rowNumber)
         } else {
-          // console.log(rowNumber)
+          return
         }
       }
     }
 
-    //* This then passes an ARRAY of any rows that need clearing:
+    //* This then passes an array of any rows that need clearing to a separate function:
     clearCompleteRows(completeRows)
   }
 
@@ -250,7 +250,7 @@ function init() {
 
 
 
-  //* FUNCTION to clear a ROW when complete:
+  //* Function to clear a row once completed:
   function clearCompleteRows(rowNumbersToClear) {
 
     //* If the array is empty, then nothing happens
@@ -258,13 +258,13 @@ function init() {
       return
     } else {
 
-      //* This then finds the HIGHEST number in the array:      
+      //* Finds the highest number in the array:      
       const firstRowToClear = rowNumbersToClear.reduce((acc, curr) => {
         return Math.max(acc, curr)
       })
 
-      //* This then removes the square-full class from the cells in that row:
-      //* Then adds the classList from the cell above 
+      //* Removes the square-full class from the cells in that row:
+      //* Adds the classList from the cell above: 
 
       for (let i = firstRowToClear; i > 0; i--) {
         const rowToClear = i
@@ -360,7 +360,6 @@ function init() {
     }
   }
 
-
   //* Remove a shape
   function removeActiveTetrimono() {
     cells[activeTetrimono.cellAPosition].classList.remove('square-full', activeTetrimono.color)
@@ -368,8 +367,6 @@ function init() {
     cells[activeTetrimono.cellCPosition].classList.remove('square-full', activeTetrimono.color)
     cells[activeTetrimono.cellDPosition].classList.remove('square-full', activeTetrimono.color)
   }
-
-
 
   //* Function to move all Active Cells (arguments for how much to move each cell)
   function moveCells(cellA, cellB, cellC, cellD) {
@@ -379,7 +376,6 @@ function init() {
     activeTetrimono.cellDPosition = activeTetrimono.cellDPosition + cellD
   }
 
-
   //* Fills a block of squares (-10 used for when the block becomes stationary, filling the squares above)
   function fillSquares(number) {
     cells[activeTetrimono.cellAPosition + number].classList.add('square-full', activeTetrimono.color)
@@ -387,8 +383,6 @@ function init() {
     cells[activeTetrimono.cellCPosition + number].classList.add('square-full', activeTetrimono.color)
     cells[activeTetrimono.cellDPosition + number].classList.add('square-full', activeTetrimono.color)
   }
-
-
 
   //* MOVE DOWN function:
   function moveDownActiveTetrimono() {
@@ -524,7 +518,6 @@ function init() {
       return
     }
   }
-
 
   //* ROTATION rules for ORANGE RICKY shape:
   function rotateOrangeRicky() {
