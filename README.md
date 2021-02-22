@@ -28,7 +28,7 @@ Tetris is a single-player video-game first developed by Russian software enginee
 
 Players build their score by moving differently shaped pieces (known as Tetrimonoes) as they descend into specific places on the grid in order to complete a full row.
 
-As more rows are completed, the difficulty level increases as Tetrimonoes fall at a faster rate. Points are awarded dependant on the difficulty level and also for completing multiple rows at once.
+As more rows are completed, the difficulty level increases as Tetrimonoes fall at a faster rate. Points are awarded depending on the difficulty level and also for completing multiple rows at once.
 
 The game ends when the playing field is full and the Tetrimonoes are no longer able to fall.
 
@@ -74,7 +74,7 @@ I repeated this process with some adjustments in order to create the 'Up Next' g
 ### Adding the shapes
 Cell positions for each Tetrimono were stored as objects in an array (see below) and randomly generated at the start of the game, and then every time the previous shape reached the playing field floor.
 
-In researching the game I was also pleased to find out that alongside names like Hero, Rhode Island Z and Teewee, I shared a name with a couple of the Tetrimonoes!
+In researching the game I was also pleased to find out that alongside names like Hero, Rhode Island Z and Teewee, I shared a name with a couple of the Tetrimonoes: Orange Ricky and Blue Ricky!
 
 ```
 {
@@ -92,11 +92,12 @@ In researching the game I was also pleased to find out that alongside names like
 ```
 
 ### Controlling the movement
-The cell positions for each Tetrimono determined whether a cell should have the class 'full', meaning occupied by a shape, and if so which colour it should be, provided in the above object.
+The cell positions for each Tetrimono determine whether a cell should have the class 'full', meaning occupied by a shape, and if so which colour it should be, provided in the above object.
 
-All Tetrimono movements after the shape had been added to the grid were therefore iterations on the above cell coordinates.
+All Tetrimono movements after the shape have been added to the grid are therefore iterations on the above cell coordinates.
 
 A timer triggers the downward movement, the intervals increasing in rate as the player progresses through the difficulty levels.
+
 
 ```
 let interval = 400 - levelTotal * 30
@@ -110,7 +111,7 @@ function startTimer() {
 
 Checks are carried out on each downward movement to determine whether the Tetrimono is either at the bottom of the grid, or about to collide with another occupied cell. Either scenario triggers the creation of a new 'active' Tetrimono.
 
-Sidewards movements and rotations similarly need to consider whether a Tetrimono is either about to collide with another stationary shape or hit the edge of the grid.
+Sidewards movements and rotations similarly have to consider whether a Tetrimono is either about to collide with another stationary shape or hit the edge of the grid.
 
 At each stage, checks are also carried out identifying whether any rows have been completed, as below:
 ### 
@@ -150,7 +151,7 @@ This function's role is to wipe all cells in each completed row of their `full` 
 
 ### Key Learnings
 
-* **JavaScript fundamentals**: This project enabled me to apply the topics explored in the first 3 weeks of the course in a practical way, using loops, conditional statements and various array methods achieve my objective.
+* **JavaScript fundamentals**: This project enabled me to apply the topics explored in the first 3 weeks of the course in a practical way, using loops, conditional statements and various array methods to achieve my objective.
 
 * **Project planning:** 
 
