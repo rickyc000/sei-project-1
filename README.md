@@ -69,6 +69,8 @@ function createGrid() {
 createGrid()
 ```
 
+![Tetris-Grid](assets/tetris-grid.png)
+
 I repeated this process with some adjustments in order to create the 'Up Next' grid. 
 
 ### Adding the shapes
@@ -146,14 +148,15 @@ This function's role is to wipe all cells in each completed row of their `full` 
 ## Reflection
 ### Challenges
 
+* **Styling:** A key challenge to overcome with this project was applying styling to the Tetrimono shapes, specifically their colour and making it possible for this to be inherited by the grid cells it moves through. The class for each grid has to not only contain information about whether it is occupied or not, but also which colour it should be filled with if occupied.
 
-
+* **Edge detection:** It was important to ensure the movement of each Tetrimono was disabled when any of the the cells were at the edge of the grid. Similarly, shape rotations had to consider whether any cells were located in a position that would lead the shape to spill over into another occupied cell or across the grid.
 
 ### Key Learnings
 
-* **JavaScript fundamentals**: This project enabled me to apply the topics explored in the first 3 weeks of the course in a practical way, using loops, conditional statements and various array methods to achieve my objective.
+* **JavaScript fundamentals:** This project enabled me to apply the topics explored in the first 3 weeks of the course in a practical way, using loops, conditional statements and various array methods to achieve my objective.
 
-* **Project planning:** 
+* **Psuedocode:** Considering this project was mostly made up of logic based tasks, planning and writing plain language descriptions of what I wanted to achieve at each step was crucial. 
 
 
 ## Credits
