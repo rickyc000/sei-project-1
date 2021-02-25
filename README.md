@@ -160,7 +160,7 @@ This function's role is to wipe all cells in each completed row of their `full` 
 
 
 ## Credits
-* General Assembly provided the starter code for a simple 10x10 grid which was adjusted to create the grid required for Tetris
+* General Assembly provided the starter code for a simple 10x10 grid which was adjusted to create the grid required for Tetris.
 * Music: 'Tachyon Frog' by CCL from Physically Sick 3 - a compilation raising money for Equality For Flatbush, an organization that has been fighting racist police abuse and gentrification since 2013. To support this project or find out more, head here: https://physicallysick3.bandcamp.com/album/physically-sick-3.
 
 
